@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --color-burgundy-50: #fdf2f4;
+  --color-burgundy-100: #fce7eb;
+  --color-burgundy-200: #f9d0d9;
+  --color-burgundy-300: #f4a9b9;
+  --color-burgundy-400: #ed7694;
+  --color-burgundy-500: #e04d73;
+  --color-burgundy-600: #cc2d5a;
+  --color-burgundy-700: #722f37;
+  --color-burgundy-800: #5a252c;
+  --color-burgundy-900: #3d1a1e;
+  --color-burgundy-950: #220e11;
+
+  --color-cream-50: #fefdfb;
+  --color-cream-100: #fdf8f0;
+  --color-cream-200: #faf0de;
+  --color-cream-300: #f5e4c5;
+  --color-cream-400: #edd4a4;
+  --color-cream-500: #e5c080;
+
+  --color-gold-300: #fcd34d;
+  --color-gold-400: #f5b942;
+  --color-gold-500: #d4a026;
+  --color-gold-600: #b8860b;
+
+  --color-wine-red: #722f37;
+  --color-wine-white: #f5e6c8;
+  --color-wine-rose: #f4a9b9;
+
+  --font-sans: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
+
+body {
+  background-color: var(--color-cream-50);
+  color: var(--color-burgundy-900);
+}
+
+.map-region {
+  transition: fill 0.2s, opacity 0.2s;
+  cursor: pointer;
+}
+.map-region:hover {
+  opacity: 0.8;
+  filter: brightness(1.1);
+}
+
+.entity-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.exam-tip {
+  border-left: 4px solid var(--color-gold-400);
+  background-color: color-mix(in srgb, var(--color-gold-400) 5%, transparent);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
