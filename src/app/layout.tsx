@@ -32,7 +32,8 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
-        <meta name="theme-color" content="#722f37" />
+        <meta name="theme-color" content="#f6f6f4" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#111113" media="(prefers-color-scheme: dark)" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="와인 러너" />
@@ -53,11 +54,16 @@ export default function RootLayout({
           `
         }} />
       </head>
-      <body className="min-h-screen bg-cream-50 text-burgundy-900 antialiased">
+      <body className="min-h-[100dvh] bg-paper text-ink antialiased">
         <Navigation />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 md:py-14">
           {children}
         </main>
+        <footer className="border-t border-line">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 text-sm text-ink-3">
+            WSET Level 3 학습용 개인 노트. 품종 맛 프로필은 Wine Folly와 WSET 교재를 참고해 정리했습니다.
+          </div>
+        </footer>
       </body>
     </html>
   );

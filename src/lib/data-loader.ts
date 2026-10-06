@@ -1,4 +1,5 @@
-import { Region, GrapeVariety } from "@/data/types";
+import { Region, GrapeVariety, GrapeProfile } from "@/data/types";
+import { grapeProfiles } from "@/data/grapes/profiles";
 import { franceRegions } from "@/data/regions/france";
 import { italyRegions } from "@/data/regions/italy";
 import { spainRegions } from "@/data/regions/spain";
@@ -47,6 +48,10 @@ export function getRegion(id: string): Region | undefined {
 
 export function getGrape(id: string): GrapeVariety | undefined {
   return grapeMap.get(id);
+}
+
+export function getGrapeProfile(id: string): GrapeProfile | undefined {
+  return grapeProfiles[id];
 }
 
 export function getRegionChildren(parentId: string): Region[] {

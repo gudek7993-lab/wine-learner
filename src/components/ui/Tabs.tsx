@@ -12,22 +12,24 @@ export default function Tabs({ tabs }: { tabs: Tab[] }) {
 
   return (
     <div>
-      <div className="flex border-b border-cream-200 gap-1 overflow-x-auto">
+      <div role="tablist" className="flex gap-6 border-b border-line overflow-x-auto scrollbar-hide">
         {tabs.map((tab, i) => (
           <button
-            key={i}
+            key={tab.label}
+            role="tab"
+            aria-selected={i === active}
             onClick={() => setActive(i)}
-            className={`px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors rounded-t-lg ${
+            className={`relative -mb-px py-3 text-sm whitespace-nowrap transition-colors border-b-2 ${
               i === active
-                ? "bg-burgundy-700 text-white"
-                : "text-burgundy-700 hover:bg-burgundy-50"
+                ? "border-accent text-ink font-semibold"
+                : "border-transparent text-ink-3 hover:text-ink"
             }`}
           >
             {tab.label}
           </button>
         ))}
       </div>
-      <div className="py-5">{tabs[active]?.content}</div>
+      <div role="tabpanel" className="pt-6">{tabs[active]?.content}</div>
     </div>
   );
 }

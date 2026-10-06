@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Card from "@/components/ui/Card";
-import Badge from "@/components/ui/Badge";
+import PageHeader from "@/components/ui/PageHeader";
 import ExamTipBox from "@/components/detail/ExamTipBox";
 
 const fortifiedWines = {
@@ -57,7 +56,7 @@ const fortifiedWines = {
   madeira: {
     title: "마데이라 (Madeira)",
     region: "포르투갈 마데이라 섬",
-    intro: "가열(Estufagem 또는 Canteiro) 과정이 독특. 캐러멜, 견과류, 산화 풍미. 거의 파괴 불가능 — 개봉 후에도 오래 보관, 100년+ 숙성 가능.",
+    intro: "가열(Estufagem 또는 Canteiro) 과정이 독특. 캐러멜, 견과류, 산화 풍미. 산화에 매우 강해 개봉 후에도 오래 보관, 100년+ 숙성 가능.",
     concepts: [
       { name: "에스투파젬 (Estufagem)", desc: "탱크를 45~50°C로 최소 3개월 가열. 기본~중급 마데이라." },
       { name: "칸테이루 (Canteiro)", desc: "자연 열로 서서히 숙성(따뜻한 다락). 프리미엄 마데이라." },
@@ -81,70 +80,58 @@ export default function FortifiedPage() {
   const wine = fortifiedWines[activeTab];
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-burgundy-800">강화 와인</h1>
-        <p className="text-burgundy-500 text-sm mt-1">
-          양조 과정 중 증류주를 첨가하여 알코올을 높인 와인. 첨가 시점이 스타일을 결정합니다.
-        </p>
-      </div>
-
-      {/* Tabs */}
-      <div className="flex gap-2">
-        {(Object.keys(fortifiedWines) as FortifiedKey[]).map((key) => (
-          <button
-            key={key}
-            onClick={() => setActiveTab(key)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              activeTab === key
-                ? "bg-burgundy-700 text-white"
-                : "bg-cream-100 text-burgundy-600 hover:bg-cream-200"
-            }`}
-          >
-            {fortifiedWines[key].title}
-          </button>
-        ))}
-      </div>
-
-      {/* Content */}
-      <div className="space-y-5">
-        <Card className="p-5">
-          <h2 className="text-xl font-bold text-burgundy-700 mb-1">{wine.title}</h2>
-          <p className="text-xs text-burgundy-400 mb-3">{wine.region}</p>
-          <p className="text-sm text-burgundy-600">{wine.intro}</p>
-        </Card>
-
-        {/* Key Concepts */}
-        {wine.concepts.length > 0 && (
-          <section>
-            <h3 className="text-lg font-bold text-burgundy-700 mb-3">핵심 개념</h3>
-            <div className="space-y-3">
-              {wine.concepts.map((c) => (
-                <Card key={c.name} className="p-4 border-l-4 border-gold-400">
-                  <h4 className="font-semibold text-burgundy-700">{c.name}</h4>
-                  <p className="text-sm text-burgundy-600 mt-1">{c.desc}</p>
-                </Card>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Styles */}
-        <section>
-          <h3 className="text-lg font-bold text-burgundy-700 mb-3">스타일</h3>
-          <div className="space-y-2">
-            {wine.styles.map((s) => (
-              <Card key={s.name} className="p-4">
-                <div className="flex items-start gap-3">
-                  <Badge variant="technique">{s.name}</Badge>
-                  <p className="text-sm text-burgundy-600">{s.desc}</p>
-                </div>
-              </Card>
+    <div className="space-y-10">
+      <PageHeader
+        title="강화 와인"
+        lead="양조 중 증류주를 넣어 알코올을 높인 와인입니다. 언제 넣느냐가 당도와 스타일을 결정합니다."
+        aside={
+          <div role="tablist" aria-label="강화 와인 종류" className="flex gap-1 rounded-full bg-sunken p-1">
+            {(Object.keys(fortifiedWines) as FortifiedKey[]).map((key) => (
+              <button
+                key={key}
+                role="tab"
+                aria-selected={activeTab === key}
+                onClick={() => setActiveTab(key)}
+                className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
+                  activeTab === key ? "bg-surface font-semibold text-ink shadow-soft" : "text-ink-3 hover:text-ink"
+                }`}
+              >
+                {fortifiedWines[key].title.split(" (")[0]}
+              </button>
             ))}
           </div>
-        </section>
+        }
+      />
 
-        {/* Tips */}
+      <div className="grid gap-10 lg:grid-cols-12">
+        <div className="space-y-4 lg:col-span-5">
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight">{wine.title}</h2>
+            <p className="mt-1 text-sm text-ink-3">{wine.region}</p>
+          </div>
+          <p className="leading-relaxed text-ink-2">{wine.intro}</p>
+          {wine.concepts.map((c) => (
+            <div key={c.name} className="rounded-xl border border-line bg-surface p-5">
+              <h3 className="font-bold text-ink">{c.name}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-ink-2">{c.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <section className="lg:col-span-7">
+          <h3 className="text-sm font-semibold text-ink-3">스타일</h3>
+          <dl className="mt-3 divide-y divide-line overflow-hidden rounded-xl border border-line bg-surface">
+            {wine.styles.map((s) => (
+              <div key={s.name} className="grid gap-1 p-4 sm:grid-cols-[11rem_1fr] sm:gap-4">
+                <dt className="font-semibold text-ink">{s.name}</dt>
+                <dd className="text-sm leading-relaxed text-ink-2">{s.desc}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      </div>
+
+      <div className="space-y-3">
         {wine.tips.map((tip, i) => (
           <ExamTipBox key={i} text={tip} />
         ))}

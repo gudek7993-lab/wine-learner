@@ -1,66 +1,138 @@
 @import "tailwindcss";
 
-@theme {
-  --color-burgundy-50: #fdf2f4;
-  --color-burgundy-100: #fce7eb;
-  --color-burgundy-200: #f9d0d9;
-  --color-burgundy-300: #f4a9b9;
-  --color-burgundy-400: #ed7694;
-  --color-burgundy-500: #e04d73;
-  --color-burgundy-600: #cc2d5a;
-  --color-burgundy-700: #722f37;
-  --color-burgundy-800: #5a252c;
-  --color-burgundy-900: #3d1a1e;
-  --color-burgundy-950: #220e11;
+/*
+  Design tokens. Neutral paper + ink, one wine accent.
+  Shape rule: surfaces (cards, panels) = rounded-xl (12px); interactive chips and buttons = rounded-full.
+  Light/dark swap via CSS variables so every utility below works in both modes.
+*/
+:root {
+  --paper: #f6f6f4;
+  --surface: #fdfdfc;
+  --sunken: #eeeeeb;
+  --line: #e2e2de;
+  --line-strong: #c9c9c3;
+  --ink: #17171a;
+  --ink-2: #45454d;
+  --ink-3: #6b6b74;
+  --accent: #a3123a;
+  --accent-hover: #870e30;
+  --on-accent: #fff7f9;
+  --accent-soft: #f7e6ea;
+  --grape-red: #7b1e3a;
+  --grape-white: #b98720;
+  --tip: #7a5200;
+  --tip-soft: #fbf2de;
+  --ok: #17704a;
+  --ok-soft: #e3f3ea;
+  --bad: #b42318;
+  --bad-soft: #fbe8e6;
 
-  --color-cream-50: #fefdfb;
-  --color-cream-100: #fdf8f0;
-  --color-cream-200: #faf0de;
-  --color-cream-300: #f5e4c5;
-  --color-cream-400: #edd4a4;
-  --color-cream-500: #e5c080;
+  /* Wine style families (Wine Folly-style spectrum) */
+  --style-light-white: #ddca73;
+  --style-aromatic-white: #c6b13c;
+  --style-rich-white: #c9952b;
+  --style-light-red: #c04a64;
+  --style-medium-red: #8e2142;
+  --style-bold-red: #561028;
 
-  --color-gold-300: #fcd34d;
-  --color-gold-400: #f5b942;
-  --color-gold-500: #d4a026;
-  --color-gold-600: #b8860b;
+  --shadow-tint: 30 20 25;
+}
 
-  --color-wine-red: #722f37;
-  --color-wine-white: #f5e6c8;
-  --color-wine-rose: #f4a9b9;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #111113;
+    --surface: #18181b;
+    --sunken: #202024;
+    --line: #2b2b30;
+    --line-strong: #3d3d44;
+    --ink: #ededef;
+    --ink-2: #b6b6be;
+    --ink-3: #8d8d97;
+    --accent: #f0587f;
+    --accent-hover: #ff7396;
+    --on-accent: #1c0910;
+    --accent-soft: #3a1621;
+    --grape-red: #e07490;
+    --grape-white: #e6c360;
+    --tip: #eabb5b;
+    --tip-soft: #2d2412;
+    --ok: #4cc38a;
+    --ok-soft: #10291c;
+    --bad: #f97066;
+    --bad-soft: #3a1714;
 
-  --font-sans: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+    --style-light-white: #e8d88f;
+    --style-aromatic-white: #d6c25a;
+    --style-rich-white: #dba84a;
+    --style-light-red: #e07490;
+    --style-medium-red: #c4436a;
+    --style-bold-red: #9a2c4f;
+
+    --shadow-tint: 0 0 0;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-accent: var(--on-accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-grape-red: var(--grape-red);
+  --color-grape-white: var(--grape-white);
+  --color-tip: var(--tip);
+  --color-tip-soft: var(--tip-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+
+  --font-sans: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
+
+html {
+  color-scheme: light dark;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background-color: var(--color-cream-50);
-  color: var(--color-burgundy-900);
+  background-color: var(--paper);
+  color: var(--ink);
 }
 
-.map-region {
-  transition: fill 0.2s, opacity 0.2s;
-  cursor: pointer;
-}
-.map-region:hover {
-  opacity: 0.8;
-  filter: brightness(1.1);
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
 }
 
-.entity-tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 10px;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.15s;
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 
-.exam-tip {
-  border-left: 4px solid var(--color-gold-400);
-  background-color: color-mix(in srgb, var(--color-gold-400) 5%, transparent);
-  padding: 1rem;
-  margin: 1rem 0;
-  border-radius: 0 0.5rem 0.5rem 0;
+.shadow-soft {
+  box-shadow: 0 1px 2px rgb(var(--shadow-tint) / 0.05), 0 8px 24px -12px rgb(var(--shadow-tint) / 0.14);
+}
+
+.scrollbar-hide { scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i, 0) * 40ms);
+  }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
 }

@@ -1,7 +1,9 @@
 "use client";
 
-import Card from "@/components/ui/Card";
-import Badge from "@/components/ui/Badge";
+import { Plant, Flask } from "@phosphor-icons/react";
+import PageHeader from "@/components/ui/PageHeader";
+import ProcessFlow from "@/components/ui/ProcessFlow";
+import ExamTipBox from "@/components/detail/ExamTipBox";
 
 const viticultureTopics = [
   {
@@ -91,81 +93,80 @@ const vinificationTopics = [
   },
 ];
 
-export default function TechniquesPage() {
+type Topic = {
+  title: string;
+  content?: string;
+  items?: { label: string; desc: string }[];
+  tip?: string;
+};
+
+function TopicBlock({ topic }: { topic: Topic }) {
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-burgundy-800">양조 기법</h1>
-        <p className="text-burgundy-500 text-sm mt-1">
-          포도 재배학(Viticulture)과 양조학(Vinification)의 핵심 개념
-        </p>
-      </div>
-
-      {/* Viticulture */}
-      <section>
-        <h2 className="text-xl font-bold text-burgundy-700 mb-4 flex items-center gap-2">
-          <span className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-sm">🌱</span>
-          포도 재배학 (Viticulture)
-        </h2>
-        <div className="space-y-4">
-          {viticultureTopics.map((topic) => (
-            <Card key={topic.title} className="p-5">
-              <h3 className="font-bold text-burgundy-700 mb-2">{topic.title}</h3>
-              {topic.content && (
-                <p className="text-sm text-burgundy-600 mb-3 bg-cream-100 p-3 rounded-lg">
-                  {topic.content}
-                </p>
-              )}
-              {topic.items && (
-                <div className="space-y-2">
-                  {topic.items.map((item) => (
-                    <div key={item.label} className="flex items-start gap-2 text-sm">
-                      <Badge variant="technique">{item.label}</Badge>
-                      <span className="text-burgundy-600">{item.desc}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {topic.tip && (
-                <div className="exam-tip mt-3">
-                  <span className="text-gold-500 font-bold text-sm">EXAM TIP</span>
-                  <span className="text-sm text-burgundy-800 ml-2">{topic.tip}</span>
-                </div>
-              )}
-            </Card>
-          ))}
+    <article className="rounded-xl border border-line bg-surface p-5 md:p-6">
+      <h3 className="text-lg font-bold text-ink">{topic.title}</h3>
+      {topic.content && (
+        <div className="mt-4">
+          {topic.content.includes("→") ? <ProcessFlow steps={topic.content} /> : <p className="text-ink-2">{topic.content}</p>}
         </div>
-      </section>
-
-      {/* Vinification */}
-      <section>
-        <h2 className="text-xl font-bold text-burgundy-700 mb-4 flex items-center gap-2">
-          <span className="w-8 h-8 rounded-full bg-burgundy-100 flex items-center justify-center text-sm">🏺</span>
-          양조학 (Vinification)
-        </h2>
-        <div className="space-y-4">
-          {vinificationTopics.map((topic) => (
-            <Card key={topic.title} className="p-5">
-              <h3 className="font-bold text-burgundy-700 mb-2">{topic.title}</h3>
-              {topic.content && (
-                <p className="text-sm text-burgundy-600 mb-3 bg-cream-100 p-3 rounded-lg font-mono text-xs">
-                  {topic.content}
-                </p>
-              )}
-              {topic.items && (
-                <div className="space-y-2">
-                  {topic.items.map((item) => (
-                    <div key={item.label} className="flex items-start gap-2 text-sm">
-                      <Badge variant="technique">{item.label}</Badge>
-                      <span className="text-burgundy-600">{item.desc}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </Card>
+      )}
+      {topic.items && (
+        <dl className="mt-5 grid gap-x-8 gap-y-4 md:grid-cols-2">
+          {topic.items.map((item) => (
+            <div key={item.label}>
+              <dt className="text-sm font-semibold text-ink">{item.label}</dt>
+              <dd className="mt-1 text-sm leading-relaxed text-ink-2">{item.desc}</dd>
+            </div>
           ))}
+        </dl>
+      )}
+      {topic.tip && (
+        <div className="mt-5">
+          <ExamTipBox text={topic.tip} />
         </div>
-      </section>
+      )}
+    </article>
+  );
+}
+
+export default function TechniquesPage() {
+  const groups = [
+    { id: "viticulture", title: "포도 재배", en: "Viticulture", icon: Plant, topics: viticultureTopics as Topic[] },
+    { id: "vinification", title: "양조", en: "Vinification", icon: Flask, topics: vinificationTopics as Topic[] },
+  ];
+
+  return (
+    <div className="space-y-14">
+      <PageHeader
+        title="재배와 양조"
+        lead="포도밭과 양조장에서의 선택이 와인 스타일로 어떻게 이어지는지 정리했습니다. 시험에서는 원인과 결과를 함께 설명해야 합니다."
+        aside={
+          <nav aria-label="섹션" className="flex gap-2">
+            {groups.map((g) => (
+              <a
+                key={g.id}
+                href={`#${g.id}`}
+                className="rounded-full border border-line-strong px-4 py-1.5 text-sm text-ink-2 transition-colors hover:border-ink hover:text-ink"
+              >
+                {g.title}
+              </a>
+            ))}
+          </nav>
+        }
+      />
+      {groups.map(({ id, title, en, icon: Icon, topics }) => (
+        <section key={id} id={id} className="scroll-mt-24">
+          <h2 className="flex items-center gap-2.5 text-2xl font-bold tracking-tight">
+            <Icon size={26} weight="duotone" className="text-accent" aria-hidden />
+            {title}
+            <span className="text-base font-normal text-ink-3">{en}</span>
+          </h2>
+          <div className="mt-6 space-y-4">
+            {topics.map((topic) => (
+              <TopicBlock key={topic.title} topic={topic} />
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   );
 }

@@ -1,61 +1,82 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Grains, Flask, Champagne, Drop, Eye, Exam, ArrowRight } from "@phosphor-icons/react";
 import WorldMap from "@/components/map/WorldMap";
 import SearchBar from "@/components/ui/SearchBar";
-import Card from "@/components/ui/Card";
-import { search } from "@/lib/data-loader";
+import StyleSpectrum from "@/components/grape/StyleSpectrum";
+import { search, allGrapes } from "@/lib/data-loader";
 
-const quickLinks = [
-  { href: "/grapes", icon: "🍇", title: "포도 품종", desc: "21가지 주요 품종의 특성과 산지" },
-  { href: "/techniques", title: "양조 기법", icon: "🏺", desc: "재배학과 양조학의 핵심 개념" },
-  { href: "/sparkling", title: "스파클링 와인", icon: "✨", desc: "전통 방식부터 탱크 방식까지" },
-  { href: "/fortified", title: "강화 와인", icon: "🥃", desc: "셰리, 포트, 마데이라" },
-  { href: "/tasting", title: "SAT 테이스팅", icon: "👃", desc: "체계적 접근법으로 와인 분석" },
-  { href: "/quiz", title: "연습 퀴즈", icon: "✏", desc: "WSET Level 3 시험 대비" },
+const studyLinks = [
+  { href: "/grapes", icon: Grains, title: "포도 품종", desc: `${allGrapes.length}개 품종의 맛 프로필` },
+  { href: "/techniques", icon: Flask, title: "재배와 양조", desc: "기후, 토양, 양조 선택" },
+  { href: "/sparkling", icon: Champagne, title: "스파클링", desc: "전통 방식과 탱크 방식" },
+  { href: "/fortified", icon: Drop, title: "강화 와인", desc: "셰리, 포트, 마데이라" },
+  { href: "/tasting", icon: Eye, title: "SAT 테이스팅", desc: "체계적 테이스팅 접근법" },
+  { href: "/quiz", icon: Exam, title: "연습 퀴즈", desc: "랜덤 10문제와 해설" },
 ];
 
 export default function HomePage() {
   const router = useRouter();
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-20 md:space-y-24">
       {/* Hero */}
-      <div className="text-center space-y-3">
-        <h1 className="text-3xl sm:text-4xl font-bold text-burgundy-800">
-          와인의 세계를 탐험하세요
-        </h1>
-        <p className="text-burgundy-500 max-w-xl mx-auto">
-          지도를 클릭하여 와인 산지를 탐색하고, 포도 품종과 양조 기법의 연결을 발견하세요.
-        </p>
-        <div className="flex justify-center">
-          <SearchBar
-            onSearch={search}
-            onSelect={(r) => router.push(r.href)}
-          />
+      <section className="grid gap-10 md:grid-cols-12 md:gap-12">
+        <div className="rise md:col-span-7">
+          <h1 className="text-4xl font-bold leading-[1.15] tracking-tight text-ink text-balance md:text-5xl">
+            와인을 산지와 구조로 이해하기
+          </h1>
+          <p className="mt-5 max-w-[46ch] text-lg leading-relaxed text-ink-2">
+            WSET Level 3 범위의 산지, 품종, 양조를 지도와 맛 프로필로 정리했습니다.
+          </p>
+          <div className="mt-8">
+            <SearchBar onSearch={search} onSelect={(r) => router.push(r.href)} />
+          </div>
         </div>
-      </div>
 
-      {/* World Map */}
-      <Card className="p-2 sm:p-4">
-        <WorldMap />
-      </Card>
+        <nav
+          aria-label="학습 메뉴"
+          className="rise grid grid-cols-1 gap-px self-start overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 md:col-span-5"
+          style={{ ["--i" as string]: 2 }}
+        >
+          {studyLinks.map(({ href, icon: Icon, title, desc }) => (
+            <Link key={href} href={href} className="group flex items-start gap-3 bg-surface p-4 transition-colors hover:bg-sunken">
+              <Icon size={22} weight="duotone" className="mt-0.5 shrink-0 text-accent" aria-hidden />
+              <span className="min-w-0">
+                <span className="flex items-center gap-1 font-semibold text-ink">
+                  {title}
+                  <ArrowRight
+                    size={14}
+                    className="-translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
+                    aria-hidden
+                  />
+                </span>
+                <span className="mt-0.5 block text-sm text-ink-3">{desc}</span>
+              </span>
+            </Link>
+          ))}
+        </nav>
+      </section>
 
-      {/* Quick Links */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        {quickLinks.map((link) => (
-          <Card
-            key={link.href}
-            hover
-            onClick={() => router.push(link.href)}
-            className="text-center p-4"
-          >
-            <div className="text-2xl mb-2">{link.icon}</div>
-            <div className="font-semibold text-sm text-burgundy-700">{link.title}</div>
-            <div className="text-xs text-burgundy-400 mt-1">{link.desc}</div>
-          </Card>
-        ))}
-      </div>
+      {/* Map */}
+      <section>
+        <h2 className="text-2xl font-bold tracking-tight">국가별 산지</h2>
+        <p className="mt-1 text-ink-3">국가를 선택하면 기후, 토양, 주요 품종과 등급 체계를 볼 수 있습니다.</p>
+        <div className="mt-6">
+          <WorldMap />
+        </div>
+      </section>
+
+      {/* Style spectrum */}
+      <section>
+        <h2 className="text-2xl font-bold tracking-tight">스타일로 보는 품종</h2>
+        <p className="mt-1 text-ink-3">가벼운 화이트부터 묵직한 레드까지, 품종을 와인 스타일 순서로 배열했습니다.</p>
+        <div className="mt-6">
+          <StyleSpectrum />
+        </div>
+      </section>
     </div>
   );
 }

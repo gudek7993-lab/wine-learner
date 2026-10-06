@@ -1,122 +1,88 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { allGrapes } from "@/lib/data-loader";
+import { allGrapes, getGrapeProfile } from "@/lib/data-loader";
+import { wineStyles } from "@/lib/wine-styles";
+import PageHeader from "@/components/ui/PageHeader";
 import Card from "@/components/ui/Card";
-import Badge from "@/components/ui/Badge";
+import TasteProfile from "@/components/grape/TasteProfile";
+
+type Filter = "all" | "red" | "white";
+
+const filters: { id: Filter; label: string }[] = [
+  { id: "all", label: "전체" },
+  { id: "white", label: "화이트" },
+  { id: "red", label: "레드" },
+];
 
 export default function GrapesPage() {
-  const router = useRouter();
-  const [filter, setFilter] = useState<"all" | "red" | "white">("all");
+  const [filter, setFilter] = useState<Filter>("all");
+  const counts: Record<Filter, number> = {
+    all: allGrapes.length,
+    red: allGrapes.filter((g) => g.color === "red").length,
+    white: allGrapes.filter((g) => g.color === "white").length,
+  };
 
-  const filtered = allGrapes.filter(
-    (g) => filter === "all" || g.color === filter
-  );
-
-  const reds = filtered.filter((g) => g.color === "red");
-  const whites = filtered.filter((g) => g.color === "white");
+  const groups = wineStyles
+    .map((style) => ({
+      style,
+      grapes: allGrapes.filter(
+        (g) => getGrapeProfile(g.id)?.style === style.id && (filter === "all" || g.color === filter),
+      ),
+    }))
+    .filter((group) => group.grapes.length > 0);
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-burgundy-800">포도 품종</h1>
-        <p className="text-burgundy-500 text-sm mt-1">
-          WSET Level 3 주요 포도 품종 {allGrapes.length}가지
-        </p>
-      </div>
-
-      {/* Filter */}
-      <div className="flex gap-2">
-        {(["all", "red", "white"] as const).map((f) => (
-          <button
-            key={f}
-            onClick={() => setFilter(f)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-              filter === f
-                ? "bg-burgundy-700 text-white"
-                : "bg-cream-100 text-burgundy-600 hover:bg-cream-200"
-            }`}
-          >
-            {{ all: "전체", red: "적포도", white: "백포도" }[f]} (
-            {{ all: allGrapes.length, red: allGrapes.filter((g) => g.color === "red").length, white: allGrapes.filter((g) => g.color === "white").length }[f]})
-          </button>
-        ))}
-      </div>
-
-      {/* Red Grapes */}
-      {reds.length > 0 && (
-        <section>
-          {filter === "all" && (
-            <h2 className="text-lg font-bold text-burgundy-700 mb-3">적포도 품종</h2>
-          )}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {reds.map((grape) => (
-              <Card
-                key={grape.id}
-                hover
-                onClick={() => router.push(`/grapes/${grape.id}`)}
-                className="p-4"
+    <div className="space-y-12">
+      <PageHeader
+        title="포도 품종"
+        lead={`WSET Level 3 핵심 품종 ${allGrapes.length}가지를 와인 스타일별로 묶었습니다. 막대는 바디, 타닌, 산도를 5단계로 나타냅니다.`}
+        aside={
+          <div role="radiogroup" aria-label="색상 필터" className="flex gap-1 rounded-full bg-sunken p-1">
+            {filters.map((f) => (
+              <button
+                key={f.id}
+                role="radio"
+                aria-checked={filter === f.id}
+                onClick={() => setFilter(f.id)}
+                className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
+                  filter === f.id ? "bg-surface font-semibold text-ink shadow-soft" : "text-ink-3 hover:text-ink"
+                }`}
               >
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-3 h-3 rounded-full bg-burgundy-700" />
-                  <span className="font-bold text-burgundy-800">{grape.nameKo}</span>
-                  <span className="text-xs text-burgundy-400">{grape.nameEn}</span>
-                </div>
-                <div className="flex flex-wrap gap-1 mb-2">
-                  {grape.characteristics.aromas.slice(0, 4).map((a) => (
-                    <Badge key={a} variant="default">{a}</Badge>
-                  ))}
-                </div>
-                <div className="text-xs text-burgundy-500">
-                  {grape.characteristics.body}
-                  {grape.characteristics.tannin && ` · ${grape.characteristics.tannin}`}
-                </div>
-                <div className="text-xs text-burgundy-400 mt-1">
-                  {grape.regions.length}개 산지
-                </div>
-              </Card>
+                {f.label}
+                <span className="ml-1.5 tabular-nums text-ink-3">{counts[f.id]}</span>
+              </button>
             ))}
           </div>
-        </section>
-      )}
+        }
+      />
 
-      {/* White Grapes */}
-      {whites.length > 0 && (
-        <section>
-          {filter === "all" && (
-            <h2 className="text-lg font-bold text-gold-600 mb-3 mt-6">백포도 품종</h2>
-          )}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {whites.map((grape) => (
-              <Card
-                key={grape.id}
-                hover
-                onClick={() => router.push(`/grapes/${grape.id}`)}
-                className="p-4"
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-3 h-3 rounded-full bg-gold-400" />
-                  <span className="font-bold text-burgundy-800">{grape.nameKo}</span>
-                  <span className="text-xs text-burgundy-400">{grape.nameEn}</span>
-                </div>
-                <div className="flex flex-wrap gap-1 mb-2">
-                  {grape.characteristics.aromas.slice(0, 4).map((a) => (
-                    <Badge key={a} variant="default">{a}</Badge>
-                  ))}
-                </div>
-                <div className="text-xs text-burgundy-500">
-                  {grape.characteristics.body}
-                  {grape.characteristics.acidity && ` · ${grape.characteristics.acidity}`}
-                </div>
-                <div className="text-xs text-burgundy-400 mt-1">
-                  {grape.regions.length}개 산지
-                </div>
-              </Card>
-            ))}
+      {groups.map(({ style, grapes }) => (
+        <section key={style.id}>
+          <div className="flex items-baseline gap-3">
+            <span aria-hidden className="h-3 w-3 shrink-0 translate-y-px rounded-full" style={{ backgroundColor: style.color }} />
+            <h2 className="text-lg font-bold tracking-tight">{style.label}</h2>
+            <span className="text-sm text-ink-3">{style.hint}</span>
+          </div>
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {grapes.map((grape) => {
+              const profile = getGrapeProfile(grape.id)!;
+              return (
+                <Card key={grape.id} href={`/grapes/${grape.id}`} className="flex flex-col">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="font-bold text-ink">{grape.nameKo}</h3>
+                    <span className="truncate text-xs text-ink-3">{grape.nameEn}</span>
+                  </div>
+                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-2">{profile.summary}</p>
+                  <div className="mt-auto pt-4">
+                    <TasteProfile taste={profile.taste} color={style.color} compact />
+                  </div>
+                </Card>
+              );
+            })}
           </div>
         </section>
-      )}
+      ))}
     </div>
   );
 }

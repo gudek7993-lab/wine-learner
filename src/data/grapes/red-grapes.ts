@@ -1,4 +1,4 @@
-import { GrapeVariety } from '@/types';
+import { GrapeVariety } from '@/data/types';
 
 export const redGrapes: GrapeVariety[] = [
   {

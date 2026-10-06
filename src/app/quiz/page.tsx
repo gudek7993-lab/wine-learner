@@ -1,222 +1,177 @@
 "use client";
 
-import { useState } from "react";
-import Card from "@/components/ui/Card";
+import { useState, useEffect } from "react";
+import { CheckCircle, XCircle, ArrowClockwise } from "@phosphor-icons/react";
+import PageHeader from "@/components/ui/PageHeader";
 import Badge from "@/components/ui/Badge";
+import { getRandomQuestions, questionBank, type QuizQuestion } from "@/data/quiz/question-bank";
 
-const questions = [
-  {
-    id: 1,
-    question: "보르도 좌안의 주요 포도 품종은?",
-    options: ["메를로", "카베르네 소비뇽", "카베르네 프랑", "말벡"],
-    correct: 1,
-    explanation: "좌안(메독 등)은 자갈 토양으로 카베르네 소비뇽에 적합합니다. 우안이 메를로 위주입니다.",
-  },
-  {
-    id: 2,
-    question: "바롤로 DOCG의 최소 총 숙성 기간은?",
-    options: ["24개월", "38개월", "50개월", "62개월"],
-    correct: 1,
-    explanation: "38개월 (그 중 오크 18개월 이상). Riserva는 62개월입니다.",
-  },
-  {
-    id: 3,
-    question: "샴페인의 Non-Vintage 최소 앙금 숙성 기간은?",
-    options: ["9개월", "12개월", "15개월", "36개월"],
-    correct: 2,
-    explanation: "15개월. Vintage 샴페인은 최소 36개월입니다.",
-  },
-  {
-    id: 4,
-    question: "플로르(Flor)가 사용되는 셰리 스타일은?",
-    options: ["올로로소", "피노", "PX", "크림"],
-    correct: 1,
-    explanation: "피노는 플로르 아래에서 생물학적 숙성합니다. 올로로소는 산화 숙성만 합니다.",
-  },
-  {
-    id: 5,
-    question: "비그림자 효과(Rain Shadow)의 대표적 예시 산지는?",
-    options: ["보르도", "부르고뉴", "알자스", "말보로"],
-    correct: 2,
-    explanation: "알자스는 보주 산맥이 비를 차단하여 프랑스에서 가장 건조한 산지 중 하나입니다.",
-  },
-  {
-    id: 6,
-    question: "아마로네 양조에서 사용되는 건조 기법의 이름은?",
-    options: ["Passerillage", "Appassimento", "Mutage", "Estufagem"],
-    correct: 1,
-    explanation: "Appassimento: 수확 후 포도를 건조시켜 당분을 농축하는 이탈리아 전통 기법입니다.",
-  },
-  {
-    id: 7,
-    question: "마데이라에서 가장 드라이한 스타일의 품종은?",
-    options: ["말바지아", "부알", "베르델류", "세르시알"],
-    correct: 3,
-    explanation: "세르시알이 가장 드라이합니다. 순서: 세르시알 > 베르델류 > 부알 > 말바지아(가장 스위트)",
-  },
-  {
-    id: 8,
-    question: "뉴질랜드에서 유일하게 대륙성 기후를 가진 산지는?",
-    options: ["말보로", "센트럴 오타고", "호크스 베이", "마틴보로"],
-    correct: 1,
-    explanation: "센트럴 오타고는 내륙에 위치하여 뉴질랜드 유일의 대륙성 기후를 가집니다.",
-  },
-  {
-    id: 9,
-    question: "리오하의 Gran Reserva 적포도주 최소 총 숙성 기간은?",
-    options: ["36개월", "48개월", "60개월", "72개월"],
-    correct: 2,
-    explanation: "60개월 (그 중 오크 18개월 이상)입니다.",
-  },
-  {
-    id: 10,
-    question: "다음 중 그르나슈가 주요 품종이 아닌 산지는?",
-    options: ["샤토뇌프 뒤 파프", "프리오라트", "바로사 밸리", "코트 로티"],
-    correct: 3,
-    explanation: "코트 로티는 시라 단독입니다 (약간의 비오니에 블렌딩 허용). 나머지는 모두 그르나슈 중심입니다.",
-  },
-];
+const QUESTIONS_PER_QUIZ = 10;
+const difficultyLabel = { easy: "쉬움", medium: "보통", hard: "어려움" } as const;
 
-export default function QuizPage() {
-  const [answers, setAnswers] = useState<Record<number, number>>({});
-  const [showResults, setShowResults] = useState(false);
+/** WSET Level 3 theory grade bands. */
+function gradeFor(pct: number) {
+  if (pct >= 80) return { label: "Distinction", note: "Pass with Distinction 수준입니다." };
+  if (pct >= 65) return { label: "Merit", note: "Pass with Merit 수준입니다." };
+  if (pct >= 55) return { label: "Pass", note: "합격선(55%)을 넘었습니다." };
+  return { label: "재도전", note: "합격선은 55%입니다. 틀린 문제의 해설을 다시 읽어 보세요." };
+}
 
-  const handleAnswer = (questionId: number, optionIndex: number) => {
-    setAnswers({ ...answers, [questionId]: optionIndex });
-  };
-
-  const handleSubmit = () => {
-    setShowResults(true);
-  };
-
-  const score = questions.reduce((acc, q) => {
-    return acc + (answers[q.id] === q.correct ? 1 : 0);
-  }, 0);
-
-  const percentage = Math.round((score / questions.length) * 100);
+function QuestionCard({
+  q,
+  index,
+  answer,
+  onAnswer,
+}: {
+  q: QuizQuestion;
+  index: number;
+  answer: number | undefined;
+  onAnswer: (i: number) => void;
+}) {
+  const answered = answer !== undefined;
+  const isCorrect = answer === q.correct;
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-burgundy-800">연습 퀴즈</h1>
-        <p className="text-burgundy-500 text-sm mt-1">
-          WSET Level 3 시험 대비 객관식 문제
-        </p>
+    <article className="rounded-xl border border-line bg-surface p-5 md:p-6">
+      <div className="flex flex-wrap items-center gap-2 text-xs text-ink-3">
+        <span className="font-bold tabular-nums text-ink-2">문제 {index + 1}</span>
+        <span aria-hidden>/</span>
+        <span>{q.category}</span>
+        <Badge className="ml-auto">{difficultyLabel[q.difficulty]}</Badge>
+      </div>
+      <h2 className="mt-3 text-lg font-semibold leading-snug text-ink">{q.question}</h2>
+
+      <div className="mt-5 grid gap-2" role="radiogroup" aria-label={`문제 ${index + 1} 보기`}>
+        {q.options.map((opt, i) => {
+          const chosen = answer === i;
+          const right = answered && i === q.correct;
+          const wrong = answered && chosen && !right;
+          return (
+            <button
+              key={i}
+              role="radio"
+              aria-checked={chosen}
+              disabled={answered}
+              onClick={() => onAnswer(i)}
+              className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition-colors active:scale-[0.99] ${
+                right
+                  ? "border-ok bg-ok-soft text-ink"
+                  : wrong
+                    ? "border-bad bg-bad-soft text-ink"
+                    : answered
+                      ? "border-line text-ink-3"
+                      : "border-line text-ink-2 hover:border-line-strong hover:bg-sunken"
+              }`}
+            >
+              <span className="w-4 shrink-0 font-semibold text-ink-3">{String.fromCharCode(65 + i)}</span>
+              <span className="flex-1">{opt}</span>
+              {right && <CheckCircle size={20} weight="fill" className="shrink-0 text-ok" aria-label="정답" />}
+              {wrong && <XCircle size={20} weight="fill" className="shrink-0 text-bad" aria-label="오답" />}
+            </button>
+          );
+        })}
       </div>
 
-      {!showResults ? (
-        <>
-          <div className="space-y-5">
-            {questions.map((q, index) => (
-              <Card key={q.id} className="p-5">
-                <div className="flex items-start gap-3 mb-3">
-                  <div className="w-7 h-7 rounded-full bg-burgundy-700 text-white flex items-center justify-center text-sm font-bold shrink-0">
-                    {index + 1}
-                  </div>
-                  <h3 className="font-semibold text-burgundy-800">{q.question}</h3>
-                </div>
-                <div className="space-y-2 ml-10">
-                  {q.options.map((opt, i) => (
-                    <button
-                      key={i}
-                      onClick={() => handleAnswer(q.id, i)}
-                      className={`w-full text-left px-4 py-2.5 rounded-lg text-sm transition-colors ${
-                        answers[q.id] === i
-                          ? "bg-burgundy-700 text-white font-medium"
-                          : "bg-cream-50 text-burgundy-700 hover:bg-cream-100"
-                      }`}
-                    >
-                      <span className="font-medium mr-2">{String.fromCharCode(65 + i)}.</span>
-                      {opt}
-                    </button>
-                  ))}
-                </div>
-              </Card>
-            ))}
-          </div>
-
-          <div className="flex justify-center">
-            <button
-              onClick={handleSubmit}
-              disabled={Object.keys(answers).length < questions.length}
-              className="px-6 py-3 bg-burgundy-700 text-white rounded-lg font-semibold hover:bg-burgundy-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              채점하기
-            </button>
-          </div>
-        </>
-      ) : (
-        <div className="space-y-5">
-          {/* Results Summary */}
-          <Card className="p-6 text-center bg-gradient-to-br from-burgundy-50 to-cream-50">
-            <div className="text-4xl font-bold text-burgundy-700 mb-2">
-              {score} / {questions.length}
-            </div>
-            <div className="text-xl text-burgundy-600 mb-3">{percentage}%</div>
-            <div className="text-sm text-burgundy-500">
-              {percentage >= 80 && "🎉 Outstanding! Pass with Distinction 수준입니다!"}
-              {percentage >= 65 && percentage < 80 && "✨ Very Good! Pass with Merit 수준입니다!"}
-              {percentage >= 55 && percentage < 65 && "✓ Good! Pass 수준입니다!"}
-              {percentage < 55 && "📚 조금 더 학습이 필요합니다. 다시 도전하세요!"}
-            </div>
-          </Card>
-
-          {/* Detailed Results */}
-          <div className="space-y-4">
-            {questions.map((q, index) => {
-              const userAnswer = answers[q.id];
-              const isCorrect = userAnswer === q.correct;
-              return (
-                <Card
-                  key={q.id}
-                  className={`p-5 border-l-4 ${
-                    isCorrect ? "border-green-500 bg-green-50/30" : "border-red-500 bg-red-50/30"
-                  }`}
-                >
-                  <div className="flex items-start gap-3 mb-2">
-                    <div
-                      className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${
-                        isCorrect ? "bg-green-500 text-white" : "bg-red-500 text-white"
-                      }`}
-                    >
-                      {isCorrect ? "✓" : "✗"}
-                    </div>
-                    <h3 className="font-semibold text-burgundy-800">{q.question}</h3>
-                  </div>
-                  <div className="ml-10 space-y-2">
-                    <div className="text-sm">
-                      <span className="text-burgundy-500">당신의 답: </span>
-                      <Badge variant={isCorrect ? "default" : "grape-red"}>
-                        {q.options[userAnswer]}
-                      </Badge>
-                    </div>
-                    {!isCorrect && (
-                      <div className="text-sm">
-                        <span className="text-burgundy-500">정답: </span>
-                        <Badge variant="default">{q.options[q.correct]}</Badge>
-                      </div>
-                    )}
-                    <p className="text-sm text-burgundy-600 bg-white p-3 rounded-lg">
-                      {q.explanation}
-                    </p>
-                  </div>
-                </Card>
-              );
-            })}
-          </div>
-
-          <div className="flex justify-center gap-3">
-            <button
-              onClick={() => {
-                setAnswers({});
-                setShowResults(false);
-              }}
-              className="px-6 py-3 bg-burgundy-700 text-white rounded-lg font-semibold hover:bg-burgundy-800 transition-colors"
-            >
-              다시 풀기
-            </button>
-          </div>
+      {answered && (
+        <div className="rise mt-4 rounded-xl bg-sunken p-4 text-sm leading-relaxed text-ink-2" aria-live="polite">
+          <span className={`mr-2 font-semibold ${isCorrect ? "text-ok" : "text-bad"}`}>{isCorrect ? "정답" : "오답"}</span>
+          {q.explanation}
         </div>
+      )}
+    </article>
+  );
+}
+
+export default function QuizPage() {
+  const [questions, setQuestions] = useState<QuizQuestion[]>([]);
+  const [answers, setAnswers] = useState<Record<string, number>>({});
+
+  const loadNewQuiz = () => {
+    setQuestions(getRandomQuestions(QUESTIONS_PER_QUIZ));
+    setAnswers({});
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Random selection must happen on the client to avoid a hydration mismatch.
+  useEffect(() => {
+    setQuestions(getRandomQuestions(QUESTIONS_PER_QUIZ));
+  }, []);
+
+  const answeredCount = Object.keys(answers).length;
+  const score = questions.reduce((acc, q) => acc + (answers[q.id] === q.correct ? 1 : 0), 0);
+  const done = questions.length > 0 && answeredCount === questions.length;
+  const pct = questions.length ? Math.round((score / questions.length) * 100) : 0;
+  const grade = gradeFor(pct);
+
+  return (
+    <div className="space-y-10">
+      <PageHeader
+        title="연습 퀴즈"
+        lead={`문제 은행 ${questionBank.length}문항에서 매번 ${QUESTIONS_PER_QUIZ}문항을 무작위로 냅니다. 보기를 고르면 바로 해설이 나옵니다.`}
+        aside={
+          <button
+            onClick={loadNewQuiz}
+            className="inline-flex items-center gap-2 rounded-full border border-line-strong px-4 py-2 text-sm font-medium text-ink-2 transition-colors hover:border-ink hover:text-ink active:scale-[0.98]"
+          >
+            <ArrowClockwise size={16} aria-hidden />
+            새 문제
+          </button>
+        }
+      />
+
+      {/* Progress */}
+      <div className="sticky top-[7.25rem] z-10 -mx-4 bg-paper/90 px-4 py-3 backdrop-blur-md md:top-16">
+        <div className="flex items-center justify-between text-sm">
+          <span className="text-ink-2">
+            <span className="font-semibold tabular-nums text-ink">{answeredCount}</span> / {questions.length || QUESTIONS_PER_QUIZ} 풀이
+          </span>
+          <span className="tabular-nums text-ink-3">정답 {score}</span>
+        </div>
+        <div className="mt-2 grid gap-1" style={{ gridTemplateColumns: `repeat(${questions.length || QUESTIONS_PER_QUIZ}, minmax(0, 1fr))` }} aria-hidden>
+          {(questions.length ? questions : Array.from({ length: QUESTIONS_PER_QUIZ })).map((q, i) => {
+            const qq = q as QuizQuestion | undefined;
+            const a = qq ? answers[qq.id] : undefined;
+            const cls = a === undefined ? "bg-line" : a === qq!.correct ? "bg-ok" : "bg-bad";
+            return <span key={i} className={`h-1.5 rounded-full ${cls}`} />;
+          })}
+        </div>
+      </div>
+
+      {questions.length === 0 ? (
+        <div className="space-y-4" aria-busy>
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="h-64 animate-pulse rounded-xl border border-line bg-surface" />
+          ))}
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {questions.map((q, i) => (
+            <QuestionCard key={q.id} q={q} index={i} answer={answers[q.id]} onAnswer={(opt) => setAnswers((prev) => ({ ...prev, [q.id]: opt }))} />
+          ))}
+        </div>
+      )}
+
+      {done && (
+        <section className="rise rounded-xl border border-line bg-surface p-6 md:p-8" aria-live="polite">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-sm text-ink-3">결과</p>
+              <p className="mt-1 text-4xl font-bold tabular-nums tracking-tight text-ink">
+                {score} <span className="text-2xl text-ink-3">/ {questions.length}</span>
+              </p>
+              <p className="mt-2 text-ink-2">
+                <span className="font-semibold text-accent">{grade.label}</span> {pct}%. {grade.note}
+              </p>
+            </div>
+            <button
+              onClick={loadNewQuiz}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-on-accent transition-colors hover:bg-accent-hover active:scale-[0.98]"
+            >
+              <ArrowClockwise size={18} aria-hidden />
+              새 문제
+            </button>
+          </div>
+        </section>
       )}
     </div>
   );

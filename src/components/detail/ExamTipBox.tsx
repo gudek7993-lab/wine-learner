@@ -1,9 +1,12 @@
+import { Lightbulb } from "@phosphor-icons/react/dist/ssr";
+
 export default function ExamTipBox({ text }: { text: string }) {
   return (
-    <div className="exam-tip">
-      <div className="flex items-start gap-2">
-        <span className="text-gold-500 font-bold text-sm shrink-0">EXAM TIP</span>
-        <p className="text-sm text-burgundy-800 leading-relaxed">{text}</p>
+    <div className="flex gap-3 rounded-xl bg-tip-soft p-4">
+      <Lightbulb size={20} weight="duotone" className="text-tip shrink-0 mt-0.5" aria-hidden />
+      <div className="text-sm leading-relaxed text-ink">
+        <span className="font-semibold text-tip mr-2">시험 포인트</span>
+        {text}
       </div>
     </div>
   );
