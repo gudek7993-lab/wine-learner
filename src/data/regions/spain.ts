@@ -8,6 +8,7 @@ export const spainRegions: Region[] = [
     parentId: null,
     children: ['spain-rioja', 'spain-ribera-del-duero', 'spain-priorat', 'spain-rueda', 'spain-rias-baixas'],
     level: 'country',
+    summary: '세계 최대 포도밭 면적을 가진 나라로 대부분 덥고 건조하다. 템프라니요와 가르나차, 숙성 기간에 따른 라벨 등급이 특징.',
     climate: {
       type: ['지중해성', '대륙성', '대서양성'],
       description: '유럽에서 가장 다양한 기후를 가진 나라 중 하나. 중앙 고원(메세타)은 극단적 대륙성, 북서부는 대서양성, 남동부는 지중해성 기후이다.',
@@ -18,30 +19,30 @@ export const spainRegions: Region[] = [
     ],
     grapes: [
       { grapeId: 'tempranillo', role: 'primary', notes: '스페인의 대표 적포도 품종. 리오하와 리베라 델 두에로의 핵심. 지역에 따라 틴토 피노, 센시벨, 틴타 델 파이스 등 다양한 이름으로 불린다.' },
-      { grapeId: 'garnacha', role: 'primary', notes: '스페인 원산(프랑스의 그르나슈). 프리오랏의 핵심 품종. 높은 알코올과 풍부한 과일 풍미.' },
+      { grapeId: 'grenache', role: 'primary', notes: '가르나차(Garnacha). 스페인 북동부가 원산으로 알려져 있다. 프리오랏, 나바라, 리오하 오리엔탈의 핵심 품종. 높은 알코올과 풍부한 붉은 과일 풍미.' },
       { grapeId: 'albarino', role: 'primary', notes: '리아스 바이사스의 대표 화이트 품종. 높은 산도와 복숭아, 살구 풍미.' },
-      { grapeId: 'verdejo', role: 'primary', notes: '루에다의 대표 화이트 품종. 허브와 시트러스 풍미의 상쾌한 와인.' },
-      { grapeId: 'carinena', role: 'secondary', notes: '프리오랏에서 가르나차와 함께 중요한 품종 (프랑스의 카리냥)' },
+      { grapeId: 'cabernet-sauvignon', role: 'permitted', notes: '리베라 델 두에로, 페네데스 등에서 블렌딩용으로 소량 재배.' },
     ],
     classifications: [
       {
         name: 'DO/DOCa 시스템',
         description: '스페인 와인 원산지 분류 체계.',
         levels: [
-          { name: 'DOCa (Denominación de Origen Calificada)', description: '최상위 등급. 현재 리오하와 프리오랏만 DOCa 등급을 보유한다.' },
+          { name: 'DOCa (Denominación de Origen Calificada)', description: '최상위 등급. 리오하와 프리오랏(카탈루냐어 DOQ)만 보유한다.' },
           { name: 'DO (Denominación de Origen)', description: '원산지 통제 명칭. 약 70개 이상의 DO가 등록되어 있다.' },
-          { name: 'Vino de Pago', description: '단일 에스테이트(포도원) 와인으로 인정받은 특별한 등급.' },
-          { name: 'VdlT (Vino de la Tierra)', description: '지역 와인. 프랑스의 IGP에 해당한다.' },
+          { name: 'VP (Vino de Pago)', description: '뛰어난 단일 에스테이트(포도원)에 부여하는 원산지 명칭. DOCa, DO와 함께 EU의 DOP(PDO)에 속한다.' },
+          { name: 'VdlT (Vino de la Tierra)', description: '지역 와인. EU의 IGP(PGI)에 해당하며 프랑스의 IGP와 같은 단계.' },
+          { name: '비노 (Vino)', description: '지리적 표시 없는 와인. 스페인 전역의 포도를 블렌딩할 수 있다.' },
         ],
       },
       {
         name: '숙성 등급 체계',
-        description: '스페인 고유의 오크 숙성 기간에 따른 와인 분류 체계. 레드 와인 기준.',
+        description: '스페인 고유의 숙성 기간에 따른 라벨 표기 체계. 아래는 스페인 국가 기준 레드 와인 최소 요건이며, 리오하는 더 엄격해 크리안자 2년(오크 12개월), 레세르바 3년(오크 12개월), 그란 레세르바 5년(오크 24개월, 병 24개월)을 요구한다.',
         levels: [
           { name: '호벤 (Joven)', description: '오크 숙성 없이 또는 최소한의 숙성. 과일 풍미가 풍부한 젊은 와인.' },
           { name: '크리안자 (Crianza)', description: '최소 24개월 숙성, 그 중 6개월 이상 오크통 숙성. 과일과 오크의 균형.' },
           { name: '레세르바 (Reserva)', description: '최소 36개월 숙성, 그 중 12개월 이상 오크통 숙성. 더 복합적이고 우아한 스타일.' },
-          { name: '그란 레세르바 (Gran Reserva)', description: '최소 60개월 숙성, 그 중 18개월 이상 오크통 숙성. 뛰어난 빈티지에만 생산하는 최상위 등급.' },
+          { name: '그란 레세르바 (Gran Reserva)', description: '최소 60개월 숙성, 그 중 18개월 이상 오크통 숙성. 전통적으로 좋은 빈티지에 생산하는 최상위 숙성 등급.' },
         ],
       },
     ],
@@ -55,12 +56,13 @@ export const spainRegions: Region[] = [
     keyFacts: [
       '세계에서 가장 넓은 포도밭 면적을 보유한 나라이다',
       'DOCa 등급은 리오하와 프리오랏 두 곳만 보유한다',
-      '숙성 등급: 호벤 → 크리안자(6mo 오크) → 레세르바(12mo 오크) → 그란 레세르바(18mo 오크)',
+      '숙성 등급(국가 기준): 호벤 → 크리안자(오크 6개월) → 레세르바(오크 12개월) → 그란 레세르바(오크 18개월)',
+      '기타 주요 품종: 베르데호(Verdejo, 루에다), 비우라/마카베오(Viura/Macabeo), 모나스트렐(Monastrell), 카리녜나(Cariñena, 카리냥)',
       '템프라니요는 지역에 따라 틴토 피노, 센시벨, 틴타 델 파이스, 울 데 리에브레 등 다양한 이름을 가진다',
       '스페인은 포도밭 면적 1위이지만, 생산량은 이탈리아/프랑스에 이어 3위 수준이다',
     ],
     examTips: [
-      '크리안자(6mo) → 레세르바(12mo) → 그란 레세르바(18mo) 오크 숙성 기간을 반드시 암기할 것',
+      '크리안자(6개월) → 레세르바(12개월) → 그란 레세르바(18개월) 오크 숙성 기간을 반드시 암기할 것. 리오하는 크리안자 12개월, 그란 레세르바 24개월로 더 엄격하다',
       'DOCa는 리오하와 프리오랏 두 곳뿐임을 기억할 것',
       '템프라니요의 다양한 지역별 이름(동의어)이 시험에 출제될 수 있다',
       '포도밭 면적 세계 1위이지만 생산량은 3위인 이유: 건조 기후로 인한 낮은 밀식도와 관개 제한',
@@ -73,6 +75,7 @@ export const spainRegions: Region[] = [
     parentId: 'spain',
     children: [],
     level: 'region',
+    summary: '에브로강 유역, 대서양과 지중해 영향이 만나는 DOCa. 템프라니요 중심 블렌드와 오크 숙성 등급.',
     climate: {
       type: ['대륙성', '대서양성', '지중해성'],
       description: '세 가지 기후의 영향을 받는 독특한 위치. 서쪽의 리오하 알타와 알라베사는 대서양의 영향으로 서늘하고, 동쪽의 리오하 오리엔탈은 지중해성 기후로 더 덥고 건조하다.',
@@ -84,10 +87,7 @@ export const spainRegions: Region[] = [
     ],
     grapes: [
       { grapeId: 'tempranillo', role: 'primary', notes: '리오하의 핵심 품종. 전체 블렌딩의 주축을 이루며, 체리, 자두, 가죽, 바닐라 풍미를 제공한다.' },
-      { grapeId: 'garnacha', role: 'secondary', notes: '템프라니요와 블렌딩하여 풍부함과 알코올을 더한다. 리오하 오리엔탈에서 주로 재배한다.' },
-      { grapeId: 'graciano', role: 'permitted', notes: '블렌딩에 색상, 향, 산도를 더하는 보조 품종' },
-      { grapeId: 'mazuelo', role: 'permitted', notes: '카리냥의 스페인 이름. 색상과 탄닌을 더하는 보조 품종' },
-      { grapeId: 'viura', role: 'secondary', notes: '리오하 화이트 와인의 전통적인 주요 품종(마카베오의 리오하 이름)' },
+      { grapeId: 'grenache', role: 'secondary', notes: '가르나차. 템프라니요와 블렌딩하여 풍부함과 알코올을 더한다. 리오하 오리엔탈에서 주로 재배한다.' },
     ],
     classifications: [
       {
@@ -101,12 +101,14 @@ export const spainRegions: Region[] = [
       },
     ],
     wineStyles: [
-      { name: '전통 리오하', description: '아메리칸 오크통에서 장기 숙성하여 바닐라, 코코넛, 딸 향이 특징적인 부드럽고 우아한 레드 와인. 전통적인 리오하 스타일이다.' },
+      { name: '전통 리오하', description: '아메리칸 오크통에서 장기 숙성하여 바닐라, 코코넛, 딜(dill) 향이 특징적인 부드럽고 우아한 레드 와인. 전통적인 리오하 스타일이다.' },
       { name: '모던 리오하', description: '프렌치 오크통을 사용하여 더 과일 중심적이고 구조감 있는 스타일. 단일 포도원 와인도 증가하고 있다.' },
       { name: '리오하 블랑코', description: '비우라(마카베오) 중심의 화이트 와인. 전통적으로 오크 숙성한 스타일이 있으며, 현대적인 프레시한 스타일도 생산한다.' },
     ],
     keyFacts: [
       '스페인 최초의 DOCa 등급 지역(1991년)',
+      '보조 품종: 그라시아노(Graciano, 색과 산도, 향), 마수엘로(Mazuelo, 카리냥, 색과 탄닌). 화이트는 비우라(Viura, 마카베오)가 중심',
+      '리오하 숙성 규정: 크리안자 2년(오크 1년), 레세르바 3년(오크 1년, 병 6개월), 그란 레세르바 5년(오크 2년, 병 2년)',
       '세 개의 서브 존: 리오하 알타, 리오하 알라베사, 리오하 오리엔탈(구 리오하 바하)',
       '전통적으로 아메리칸 오크를 사용하지만, 현대적인 생산자들은 프렌치 오크도 사용한다',
       '아메리칸 오크 = 바닐라/코코넛 풍미, 프렌치 오크 = 더 섬세한 향신료 풍미',
@@ -126,6 +128,7 @@ export const spainRegions: Region[] = [
     parentId: 'spain',
     children: [],
     level: 'region',
+    summary: '해발 700m 이상 고원의 극단적 대륙성 기후. 틴토 피노(템프라니요)로 만드는 진하고 강건한 레드.',
     climate: {
       type: ['극단적 대륙성'],
       description: '해발 700-1,000m의 높은 고원 지대에 위치하여 극단적인 대륙성 기후를 보인다. 여름 낮에는 40°C 이상, 밤에는 급격히 떨어지는 극심한 일교차가 특징이다.',
@@ -138,12 +141,14 @@ export const spainRegions: Region[] = [
       { grapeId: 'tempranillo', role: 'primary', notes: '현지에서 틴토 피노(Tinto Fino) 또는 틴타 델 파이스(Tinta del País)라 불린다. 리오하보다 더 진하고 구조감 있는 와인을 생산한다.' },
       { grapeId: 'cabernet-sauvignon', role: 'permitted', notes: '일부 생산자가 블렌딩에 사용. 베가 시실리아의 우니코가 대표적이다.' },
       { grapeId: 'merlot', role: 'permitted', notes: '소량 블렌딩에 사용' },
+      { grapeId: 'malbec', role: 'permitted', notes: '허용 보조 품종이나 재배량은 매우 적다.' },
     ],
     wineStyles: [
       { name: '리베라 델 두에로 레드', description: '템프라니요(틴토 피노) 중심의 강건하고 진한 풀 바디 레드 와인. 검은 과일, 향신료, 토스트 풍미. 리오하보다 더 농축되고 파워풀한 스타일이다.' },
     ],
     keyFacts: [
-      '베가 시실리아(Vega Sicilia)는 스페인에서 가장 유명하고 비싼 와이너리로, 우니코(Único)가 대표 와인이다',
+      '베가 시실리아(Vega Sicilia)는 스페인에서 가장 유명한 와이너리 중 하나로, 우니코(Único)가 대표 와인이다',
+      '레드 와인은 템프라니요(틴토 피노)를 최소 75% 사용해야 한다',
       '템프라니요를 현지에서는 틴토 피노(Tinto Fino) 또는 틴타 델 파이스라 부른다',
       '해발 700-1,000m의 높은 고원 지대에 위치하여 극단적인 일교차를 보인다',
       '큰 일교차가 포도의 산도를 유지하면서 충분한 당도를 확보하게 해준다',
@@ -162,6 +167,7 @@ export const spainRegions: Region[] = [
     parentId: 'spain',
     children: [],
     level: 'region',
+    summary: '카탈루냐의 가파른 리코렐라(슬레이트) 산지. 오래된 가르나차와 카리녜나의 농축된 레드.',
     climate: {
       type: ['지중해성', '대륙성'],
       description: '카탈루냐 남부의 내륙 산악 지역. 덥고 건조한 여름과 추운 겨울. 극도로 낮은 강수량으로 포도나무가 깊은 뿌리를 내린다.',
@@ -171,10 +177,9 @@ export const spainRegions: Region[] = [
       { type: ['리코렐라(llicorella)'], description: '프리오랏의 가장 독특한 특징인 리코렐라 토양. 슬레이트(점판암)와 석영 조각으로 이루어진 척박한 토양으로, 포도나무가 수분을 찾아 매우 깊은 뿌리를 내리게 한다. 이것이 와인에 독특한 미네랄 풍미를 부여한다.' },
     ],
     grapes: [
-      { grapeId: 'garnacha', role: 'primary', notes: '프리오랏의 핵심 품종. 오래된 관목형 포도나무(bush vine)에서 극도로 낮은 수확량으로 농축된 와인을 생산한다.' },
-      { grapeId: 'carinena', role: 'primary', notes: '가르나차와 함께 프리오랏의 핵심 품종. 현지명 카리녜나(Cariñena), 프랑스의 카리냥(Carignan)과 동일.' },
+      { grapeId: 'grenache', role: 'primary', notes: '가르나차(Garnacha). 프리오랏의 핵심 품종. 오래된 관목형 포도나무(bush vine)에서 극도로 낮은 수확량으로 농축된 와인을 생산한다.' },
       { grapeId: 'cabernet-sauvignon', role: 'permitted', notes: '일부 생산자가 블렌딩에 사용' },
-      { grapeId: 'syrah', role: 'permitted', notes: '일부 생산자가 블렌딩에 사용' },
+      { grapeId: 'syrah-shiraz', role: 'permitted', notes: '일부 생산자가 블렌딩에 사용' },
     ],
     wineStyles: [
       { name: '프리오랏 레드', description: '가르나차와 카리녜나 중심의 매우 농축되고 파워풀한 레드 와인. 높은 알코올(14-16%), 진한 색상, 검은 과일, 미네랄, 향신료 풍미. 리코렐라 토양에서 오는 독특한 미네랄 특성이 있다.' },
@@ -184,7 +189,7 @@ export const spainRegions: Region[] = [
       '리코렐라(llicorella) 슬레이트 토양이 프리오랏의 가장 독특한 특징이다',
       '극도로 낮은 수확량(주당 1kg 미만)으로 매우 농축된 와인을 생산한다',
       '1990년대 "프리오랏 르네상스"를 통해 세계적 명성을 얻었다',
-      '가르나차와 카리녜나가 핵심 품종이며, 오래된 관목형 포도나무가 많다',
+      '가르나차와 카리녜나(Cariñena, 프랑스의 카리냥)가 핵심 품종이며, 오래된 관목형 포도나무가 많다',
     ],
     examTips: [
       '리코렐라(llicorella) = 슬레이트/점판암 토양은 프리오랏의 핵심 키워드이다',
@@ -200,6 +205,7 @@ export const spainRegions: Region[] = [
     parentId: 'spain',
     children: [],
     level: 'region',
+    summary: '두에로강 유역 고원의 대륙성 기후. 베르데호로 만드는 허브 향의 상쾌한 드라이 화이트.',
     climate: {
       type: ['대륙성'],
       description: '카스티야 이 레온의 높은 고원 지대(600-800m)에 위치. 여름은 덥고 건조하며, 겨울은 춥다. 큰 일교차가 화이트 포도의 산도 유지에 기여한다.',
@@ -209,20 +215,20 @@ export const spainRegions: Region[] = [
       { type: ['자갈', '모래', '석회암'], description: '자갈과 모래가 혼합된 배수가 좋은 토양. 석회암 기반이 미네랄 특성을 부여한다.' },
     ],
     grapes: [
-      { grapeId: 'verdejo', role: 'primary', notes: '루에다의 대표 품종. 허브(회향), 시트러스, 열대 과일 풍미와 약간의 쓴 아몬드 마무리가 특징적이다.' },
-      { grapeId: 'sauvignon-blanc', role: 'secondary', notes: '소량 재배되며, 베르데호와 블렌딩하거나 단독으로 사용한다.' },
+      { grapeId: 'sauvignon-blanc', role: 'secondary', notes: '베르데호와 블렌딩하거나 단독으로 사용한다.' },
     ],
     wineStyles: [
-      { name: '루에다 베르데호', description: '상쾌하고 허브 향이 풍부한 드라이 화이트 와인. 시트러스, 회향, 풀 향이 특징적이며, 약간의 쓴 아몬드 뉘앙스가 있다. 스페인 최고의 화이트 와인 산지로 인정받는다.' },
+      { name: '루에다 베르데호', description: '상쾌하고 허브 향이 풍부한 드라이 화이트 와인. 시트러스, 회향, 풀 향이 특징적이며, 약간의 쓴 아몬드 뉘앙스가 있다. 대부분 무오크로 신선하게 만들어 일찍 마신다.' },
     ],
     keyFacts: [
-      '스페인 최고의 화이트 와인 산지로 인정받는다',
-      '베르데호가 대표 품종이며, 허브(회향)와 시트러스 풍미가 특징적이다',
-      '뉴질랜드 소비뇽 블랑과 비교되지만, 더 풍부한 바디감과 독특한 허브 특성을 가진다',
+      '리아스 바이사스와 함께 스페인을 대표하는 화이트 와인 산지다',
+      '베르데호(Verdejo)가 대표 품종이며, 허브(회향), 시트러스, 약간의 쓴 아몬드 풍미가 특징적이다',
+      '산화를 막기 위해 야간 기계 수확과 저온 발효 등 환원적 양조를 많이 사용한다',
+      '소비뇽 블랑도 중요하며 베르데호와 블렌딩하기도 한다',
     ],
     examTips: [
       '루에다 = 베르데호 = 상쾌한 화이트 와인으로 기억할 것',
-      '스페인의 대표적인 화이트 와인 산지임을 기억할 것',
+      '고지대 대륙성 기후의 큰 일교차가 더운 여름에도 화이트 와인의 산도를 지켜준다는 점을 설명할 수 있어야 한다',
     ],
   },
   {
@@ -232,6 +238,7 @@ export const spainRegions: Region[] = [
     parentId: 'spain',
     children: [],
     level: 'region',
+    summary: '갈리시아 대서양 연안의 서늘하고 습한 기후. 화강암 토양의 알바리뇨 화이트.',
     climate: {
       type: ['대서양성'],
       description: '스페인 북서부 갈리시아 지방의 대서양 연안에 위치. 스페인에서 가장 서늘하고 습한 기후. 높은 강수량과 서늘한 기온이 특징이다.',
@@ -241,7 +248,7 @@ export const spainRegions: Region[] = [
       { type: ['화강암'], description: '화강암 기반의 토양이 와인에 미네랄 특성을 부여한다. 배수가 잘 되어 높은 강수량에도 불구하고 포도 재배에 적합하다.' },
     ],
     grapes: [
-      { grapeId: 'albarino', role: 'primary', notes: '리아스 바이사스의 거의 유일한 품종. 두꺼운 껍질이 습한 기후에서 곰팡이 저항력을 제공한다. 복숭아, 살구, 시트러스, 미네랄 풍미.' },
+      { grapeId: 'albarino', role: 'primary', notes: '리아스 바이사스 재배 면적의 대부분을 차지하는 품종. 두꺼운 껍질이 습한 기후에서 곰팡이 저항력을 제공한다. 복숭아, 살구, 시트러스, 미네랄 풍미.' },
     ],
     wineStyles: [
       { name: '알바리뇨', description: '높은 산도와 미네랄 풍미를 가진 상쾌한 드라이 화이트 와인. 복숭아, 살구, 시트러스 풍미가 특징이며, 해산물과 완벽한 페어링을 이룬다.' },

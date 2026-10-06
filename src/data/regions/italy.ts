@@ -8,6 +8,7 @@ export const italyRegions: Region[] = [
     parentId: null,
     children: ['italy-piedmont', 'italy-tuscany', 'italy-veneto', 'italy-south'],
     level: 'country',
+    summary: '알프스부터 지중해까지 남북으로 긴 반도. 산지오베제, 네비올로 등 수많은 토착 품종과 DOCG/DOC/IGT 체계.',
     climate: {
       type: ['지중해성', '대륙성', '고산성'],
       description: '남북으로 길게 뻗은 반도 지형으로 인해 북부의 대륙성 기후부터 남부의 지중해성 기후까지 매우 다양한 기후대를 보유하고 있다. 알프스 산맥과 아펜니노 산맥이 기후에 큰 영향을 미친다.',
@@ -19,24 +20,20 @@ export const italyRegions: Region[] = [
     grapes: [
       { grapeId: 'sangiovese', role: 'primary', notes: '이탈리아에서 가장 많이 재배되는 적포도 품종으로, 토스카나의 대표 품종' },
       { grapeId: 'nebbiolo', role: 'primary', notes: '피에몬테의 왕, 바롤로와 바르바레스코의 유일한 품종' },
-      { grapeId: 'barbera', role: 'primary', notes: '피에몬테에서 가장 많이 재배되는 품종' },
-      { grapeId: 'corvina', role: 'primary', notes: '베네토 발폴리첼라와 아마로네의 핵심 품종' },
-      { grapeId: 'glera', role: 'primary', notes: '프로세코의 주요 품종' },
-      { grapeId: 'aglianico', role: 'primary', notes: '남부 이탈리아의 대표 고급 적포도 품종' },
-      { grapeId: 'nero-davola', role: 'secondary', notes: '시칠리아의 대표 토착 적포도 품종' },
-      { grapeId: 'primitivo', role: 'secondary', notes: '풀리아의 대표 품종, 미국의 진판델과 동일' },
-      { grapeId: 'trebbiano', role: 'secondary', notes: '이탈리아에서 가장 많이 재배되는 청포도 품종' },
-      { grapeId: 'garganega', role: 'secondary', notes: '소아베의 주요 품종' },
+      { grapeId: 'pinot-grigio-gris', role: 'secondary', notes: '피노 그리지오(Pinot Grigio). 베네토, 프리울리, 트렌티노 등 북동부에서 가볍고 신선한 드라이 화이트로 대량 생산.' },
+      { grapeId: 'cabernet-sauvignon', role: 'secondary', notes: '볼게리 등 토스카나 해안의 슈퍼 투스칸 블렌드에 사용.' },
+      { grapeId: 'merlot', role: 'secondary', notes: '슈퍼 투스칸 블렌드와 북동부의 레드에 사용.' },
+      { grapeId: 'chardonnay', role: 'secondary', notes: '프란차코르타(Franciacorta) 전통 방식 스파클링의 주품종.' },
     ],
     classifications: [
       {
         name: 'DOCG/DOC/IGT 시스템',
-        description: '이탈리아 와인 분류 체계로, 피라미드 형태로 품질을 구분한다.',
+        description: '이탈리아 와인 분류 체계로, 피라미드 형태로 품질을 구분한다. EU 체계에서 DOCG와 DOC는 DOP(PDO), IGT는 IGP(PGI)에 해당한다.',
         levels: [
           { name: 'DOCG (Denominazione di Origine Controllata e Garantita)', description: '최상위 등급. 가장 엄격한 생산 규정을 적용하며, 병목에 정부 보증 밴드를 부착한다. 바롤로, 바르바레스코, 브루넬로 디 몬탈치노 등이 포함된다.' },
           { name: 'DOC (Denominazione di Origine Controllata)', description: '원산지 통제 명칭. 특정 지역에서 정해진 품종과 양조법으로 생산해야 한다.' },
           { name: 'IGT (Indicazione Geografica Tipica)', description: '지역 특성 표시 와인. DOC/DOCG보다 규정이 유연하여 혁신적인 와인 생산이 가능하다. 슈퍼 투스칸이 대표적이다.' },
-          { name: 'Vino da Tavola', description: '테이블 와인. 가장 기본적인 등급으로 라벨에 빈티지나 품종 표시 제한이 있다.' },
+          { name: '비노 (Vino, 구 Vino da Tavola)', description: '지리적 표시 없는 와인. 가장 기본 등급으로, 원산지를 이탈리아로만 표기한다.' },
         ],
       },
     ],
@@ -51,12 +48,14 @@ export const italyRegions: Region[] = [
       '2,000개 이상의 토착 포도 품종을 보유한 세계 최고의 품종 다양성을 자랑한다',
       '20개 모든 행정 구역에서 와인을 생산한다',
       'DOCG 등급은 약 77개, DOC는 약 330개가 등록되어 있다',
+      '주요 토착 적포도: 바르베라(Barbera), 돌체토(Dolcetto), 코르비나(Corvina), 몬테풀치아노(Montepulciano), 아글리아니코(Aglianico), 네로 다볼라(Nero d\'Avola), 프리미티보(Primitivo)',
+      '주요 토착 청포도: 글레라(Glera, 프로세코), 가르가네가(Garganega, 소아베), 트레비아노(Trebbiano), 코르테제(Cortese, 가비), 피아노(Fiano), 베르디키오(Verdicchio)',
       '고대 그리스인들이 이탈리아를 "에노트리아(Oenotria, 와인의 땅)"라고 불렀다',
     ],
     examTips: [
-      'DOCG → DOC → IGT → Vino da Tavola 피라미드 구조를 반드시 암기할 것',
+      'DOCG → DOC → IGT → 비노(Vino) 피라미드 구조를 반드시 암기할 것',
       'IGT 등급에서 슈퍼 투스칸 같은 고급 와인이 생산될 수 있음을 기억할 것',
-      '이탈리아는 토착 품종의 다양성이 핵심 — 국제 품종보다 토착 품종 중심으로 학습할 것',
+      '이탈리아는 토착 품종의 다양성이 핵심이다. 국제 품종보다 토착 품종 중심으로 학습할 것',
       'DOCG 병목의 정부 보증 밴드(banderole)가 품질 보증의 표시임을 기억할 것',
     ],
   },
@@ -67,6 +66,7 @@ export const italyRegions: Region[] = [
     parentId: 'italy',
     children: [],
     level: 'region',
+    summary: '알프스 기슭의 대륙성 기후와 가을 안개. 네비올로로 만드는 바롤로, 바르바레스코의 산지.',
     climate: {
       type: ['대륙성'],
       description: '알프스 산맥 기슭에 위치한 대륙성 기후로, 여름은 덥고 겨울은 춥다. 가을철 안개(nebbia)가 매우 유명하며, 네비올로 품종의 이름도 이 안개에서 유래했다. 일교차가 크고 수확기에 안개가 자주 발생한다.',
@@ -77,10 +77,6 @@ export const italyRegions: Region[] = [
     ],
     grapes: [
       { grapeId: 'nebbiolo', role: 'primary', notes: '바롤로 DOCG와 바르바레스코 DOCG의 유일한 품종. 높은 탄닌과 산도, 타르와 장미 향이 특징적이다.' },
-      { grapeId: 'barbera', role: 'primary', notes: '피에몬테에서 가장 많이 재배되는 품종. 높은 산도와 낮은 탄닌이 특징. 바르베라 다스티(Barbera d\'Asti)와 바르베라 달바(Barbera d\'Alba)가 대표적이다.' },
-      { grapeId: 'dolcetto', role: 'secondary', notes: '이름은 "작은 달콤함"이지만 드라이 와인을 생산한다. 낮은 산도와 부드러운 탄닌으로 일찍 마실 수 있는 와인을 만든다.' },
-      { grapeId: 'moscato', role: 'secondary', notes: '모스카토 다스티(Moscato d\'Asti DOCG)와 아스티 스푸만테(Asti DOCG)의 품종. 달콤하고 가벼운 스파클링 와인을 생산한다.' },
-      { grapeId: 'cortese', role: 'permitted', notes: '가비(Gavi DOCG) 화이트 와인의 품종' },
     ],
     classifications: [
       {
@@ -105,20 +101,22 @@ export const italyRegions: Region[] = [
       { name: '모던 바롤로', description: '소형 프랑스산 바리크(barrique)에서 숙성하여 더 부드럽고 과일 향이 풍부한 스타일. 회전 발효기를 사용하기도 한다.' },
       { name: '바르베라', description: '높은 산도와 체리 과일 풍미가 특징적인 중간 바디의 레드 와인. 일상적인 음용에서 고급 와인까지 다양하다.' },
       { name: '돌체토', description: '부드럽고 과일 향이 풍부한 가볍고 접근하기 쉬운 레드 와인. 젊었을 때 마시기 좋다.' },
-      { name: '모스카토 다스티/아스티', description: '달콤하고 과일 향이 풍부한 저알코올(5-7% ABV) 세미 스파클링 또는 스파클링 화이트 와인' },
+      { name: '모스카토 다스티/아스티', description: '달콤하고 포도, 복숭아, 꽃 향이 풍부한 저알코올 와인. 모스카토 다스티는 약발포(프리잔테)로 약 5% 내외, 아스티는 완전 발포로 약 7% 내외.' },
     ],
     keyFacts: [
       '바롤로 DOCG: 네비올로 100%, 최소 38개월 숙성(18개월 오크), 리제르바 62개월',
       '바르바레스코 DOCG: 네비올로 100%, 최소 26개월 숙성(9개월 오크), 리제르바 50개월',
       '네비올로(Nebbiolo)라는 이름은 가을 안개를 뜻하는 "nebbia"에서 유래했다',
       '전통파 vs 모던파 논쟁: 대형 botte vs 소형 barrique 숙성',
-      '바르베라는 피에몬테에서 가장 많이 재배되는 품종이다',
+      '바르베라(Barbera)는 피에몬테에서 가장 많이 재배되는 품종이다. 높은 산도, 낮은 탄닌이 특징이며 바르베라 다스티, 바르베라 달바가 대표적이다',
+      '돌체토(Dolcetto)는 "작은 달콤함"이라는 뜻이지만 드라이 레드를 만든다. 일찍 마시는 부드러운 스타일',
+      '모스카토(Moscato)로 만드는 모스카토 다스티와 아스티 DOCG는 달콤하고 알코올이 낮은 스파클링 와인이다',
       '바롤로와 바르바레스코 모두 랑게(Langhe) 지역에 위치한다',
-      '가비(Gavi DOCG)는 코르테제 품종으로 만든 드라이 화이트 와인이다',
+      '가비(Gavi DOCG)는 코르테제(Cortese) 품종으로 만든 드라이 화이트 와인이다',
     ],
     examTips: [
-      '바롤로 38개월(18mo 오크)과 바르바레스코 26개월(9mo 오크) 숙성 기간을 반드시 구분하여 암기할 것',
-      '네비올로의 특징: 높은 탄닌 + 높은 산도 + 옅은 색상(가넷/벽돌색) — 이 세 가지 조합이 핵심',
+      '바롤로 38개월(오크 18개월)과 바르바레스코 26개월(오크 9개월) 숙성 기간을 반드시 구분하여 암기할 것',
+      '네비올로의 특징: 높은 탄닌 + 높은 산도 + 옅은 색상(가넷/벽돌색). 이 세 가지 조합이 핵심',
       '전통파(botte, 장기 침용)와 모던파(barrique, 짧은 침용)의 차이를 이해할 것',
       '바롤로는 바르바레스코보다 더 강건하고 장기 숙성력이 뛰어나며, 바르바레스코는 더 우아하고 일찍 접근 가능하다',
       '바르베라(높은 산도, 낮은 탄닌)와 돌체토(낮은 산도, 중간 탄닌)의 특성을 반대로 기억할 것',
@@ -131,6 +129,7 @@ export const italyRegions: Region[] = [
     parentId: 'italy',
     children: [],
     level: 'region',
+    summary: '지중해성 기후의 구릉지. 산지오베제 중심의 키안티 클라시코, 브루넬로와 국제 품종의 슈퍼 투스칸.',
     climate: {
       type: ['지중해성', '대륙성'],
       description: '해안 지역은 지중해성 기후이지만, 내륙의 키안티 지역은 해발고도가 높아 대륙성 기후의 영향을 받는다. 여름은 덥고 건조하며, 해발고도에 따라 일교차가 커진다.',
@@ -144,7 +143,6 @@ export const italyRegions: Region[] = [
       { grapeId: 'sangiovese', role: 'primary', notes: '토스카나의 대표 품종. 키안티 클라시코, 브루넬로 디 몬탈치노, 비노 노빌레 디 몬테풀치아노의 핵심 품종. 높은 산도와 탄닌, 체리와 허브 풍미가 특징적이다.' },
       { grapeId: 'cabernet-sauvignon', role: 'secondary', notes: '슈퍼 투스칸의 핵심 품종. 사시카이아(Sassicaia)가 대표적이다.' },
       { grapeId: 'merlot', role: 'secondary', notes: '슈퍼 투스칸 블렌딩에 사용. 마세토(Masseto)가 대표적인 100% 메를로 슈퍼 투스칸이다.' },
-      { grapeId: 'vernaccia', role: 'permitted', notes: '베르나차 디 산 지미냐노(Vernaccia di San Gimignano DOCG) 화이트 와인의 품종' },
     ],
     classifications: [
       {
@@ -153,7 +151,7 @@ export const italyRegions: Region[] = [
         levels: [
           { name: '키안티 클라시코', description: '최소 12개월 숙성' },
           { name: '키안티 클라시코 리제르바', description: '최소 24개월 숙성' },
-          { name: '키안티 클라시코 그란 셀레치오네', description: '최소 30개월 숙성, 단일 포도원 포도 사용' },
+          { name: '키안티 클라시코 그란 셀레치오네', description: '최소 30개월 숙성. 생산자 소유 포도밭의 포도만 사용(단일 포도밭 또는 자가 포도밭 블렌드). 2023년 개정 규정에 따라 2027 빈티지부터 산지오베제 최소 90%, 나머지는 토착 품종만 허용.' },
         ],
       },
       {
@@ -175,9 +173,10 @@ export const italyRegions: Region[] = [
     keyFacts: [
       '브루넬로 디 몬탈치노 DOCG: 산지오베제 100%, 최소 5년 숙성(2년 오크), 리제르바 6년',
       '키안티 클라시코 DOCG: 산지오베제 최소 80%, 검은 수탉(Gallo Nero) 로고',
-      '슈퍼 투스칸: IGT 등급이지만 이탈리아 최고가 와인 — 사시카이아(1968년 첫 빈티지)가 시초',
+      '슈퍼 투스칸: IGT 등급이지만 이탈리아 최고가 와인 중 일부. 사시카이아(1968년 첫 상업 빈티지)가 시초',
       '사시카이아는 최초의 슈퍼 투스칸이며, 나중에 자체 DOC(볼게리 사시카이아)를 획득했다',
       '갈레스트로와 알베레세 토양이 산지오베제에 이상적이다',
+      '베르나차 디 산 지미냐노(Vernaccia di San Gimignano DOCG)는 토스카나의 대표 화이트 와인이다',
       '산지오베제는 지역에 따라 브루넬로, 프루뇰로 젠틸레 등 다른 이름으로 불린다',
     ],
     examTips: [
@@ -195,6 +194,7 @@ export const italyRegions: Region[] = [
     parentId: 'italy',
     children: [],
     level: 'region',
+    summary: '가르다 호수와 알프스 영향의 북동부 산지. 아마로네, 발폴리첼라, 소아베, 프로세코.',
     climate: {
       type: ['대륙성', '지중해성'],
       description: '북부 산악 지역은 대륙성 기후, 가르다 호수 주변은 온난한 기후, 해안 지역은 지중해성 기후의 영향을 받는다. 전반적으로 온화하며 강수량이 적절하다.',
@@ -204,11 +204,8 @@ export const italyRegions: Region[] = [
       { type: ['화산토', '석회암', '충적토'], description: '소아베 지역은 화산토, 발폴리첼라는 석회암과 점토, 프로세코 지역은 점토와 석회암 토양이다.' },
     ],
     grapes: [
-      { grapeId: 'corvina', role: 'primary', notes: '발폴리첼라와 아마로네의 핵심 품종. 체리 풍미와 높은 산도가 특징이다.' },
-      { grapeId: 'garganega', role: 'primary', notes: '소아베 DOC/DOCG의 주요 품종(최소 70%). 섬세한 아몬드와 시트러스 풍미가 특징이다.' },
-      { grapeId: 'glera', role: 'primary', notes: '프로세코 DOC/DOCG의 주요 품종(최소 85%). 청사과, 배, 꽃 향이 특징적이다.' },
-      { grapeId: 'rondinella', role: 'secondary', notes: '발폴리첼라 블렌딩에 사용되는 보조 품종' },
-      { grapeId: 'corvinone', role: 'permitted', notes: '코르비나의 대체 품종으로 발폴리첼라에 사용 가능' },
+      { grapeId: 'pinot-grigio-gris', role: 'secondary', notes: '피노 그리지오. 베네토 평지에서 가볍고 중성적인 드라이 화이트로 대량 생산된다.' },
+      { grapeId: 'merlot', role: 'permitted', notes: '평지의 IGT, DOC 레드에 사용.' },
     ],
     classifications: [
       {
@@ -237,12 +234,14 @@ export const italyRegions: Region[] = [
       { name: '프로세코', description: '글레라 품종의 경쾌하고 과일 향이 풍부한 스파클링 와인. 샤르마(탱크) 방식으로 생산한다.' },
     ],
     keyFacts: [
+      '발폴리첼라 품종: 코르비나(Corvina, 체리 풍미, 높은 산도)가 중심이며 코르비노네(Corvinone), 론디넬라(Rondinella)를 블렌딩',
+      '소아베는 가르가네가(Garganega, 최소 70%), 프로세코는 글레라(Glera, 최소 85%)로 만든다',
       '아마로네 DOCG: 아파시멘토(건조) 기법, 14-16% ABV, 코르비나 중심 블렌드',
       '리파소(Ripasso): 아마로네 찌꺼기 위에서 재발효, "베이비 아마로네"',
       '프로세코는 샤르마(탱크) 방식으로 생산하며, 전통 방식(메소도 클라시코)이 아니다',
       '소아베 DOCG/DOC: 가르가네가 최소 70%',
       '베네토는 이탈리아에서 가장 많은 양의 DOC/DOCG 와인을 생산하는 지역이다',
-      '아마로네에서 "amaro"는 "쓴"이라는 뜻으로, 완전히 드라이하게 발효시킨다는 의미이다',
+      '아마로네의 "amaro"는 "쓴"이라는 뜻으로, 달콤한 레치오토와 달리 드라이하게 발효한 와인임을 나타낸다',
     ],
     examTips: [
       '아파시멘토(건조) 기법: 수확 → 3-4개월 건조 → 당분 농축 → 완전 발효 = 아마로네(드라이), 발효 중단 = 레치오토(스위트)',
@@ -259,6 +258,7 @@ export const italyRegions: Region[] = [
     parentId: 'italy',
     children: [],
     level: 'region',
+    summary: '덥고 건조한 지중해성 기후에 화산토와 고도가 다양성을 더한다. 아글리아니코, 네렐로 마스칼레제, 프리미티보.',
     climate: {
       type: ['지중해성', '대륙성'],
       description: '전반적으로 덥고 건조한 지중해성 기후이지만, 화산(에트나)과 해발고도에 따라 크게 달라진다. 캄파니아 내륙은 대륙성 기후의 영향을 받는다.',
@@ -269,13 +269,8 @@ export const italyRegions: Region[] = [
       { type: ['석회암', '점토'], description: '풀리아와 캄파니아 내륙의 토양' },
     ],
     grapes: [
-      { grapeId: 'aglianico', role: 'primary', notes: '캄파니아의 왕. 타우라시 DOCG의 주요 품종으로, "남부의 바롤로"라 불린다. 높은 탄닌과 산도, 뛰어난 숙성 잠재력을 가진다.' },
-      { grapeId: 'nero-davola', role: 'primary', notes: '시칠리아의 대표 적포도 품종. 풍부한 과일 풍미와 향신료 특성을 가진다.' },
-      { grapeId: 'nerello-mascalese', role: 'primary', notes: '에트나 DOC의 핵심 적포도 품종. 피노 누아에 비교되는 우아한 스타일로 주목받고 있다.' },
-      { grapeId: 'primitivo', role: 'primary', notes: '풀리아의 대표 품종으로, 유전적으로 미국의 진판델(Zinfandel)과 동일하다. 풍부하고 과일 향이 진한 와인을 생산한다.' },
-      { grapeId: 'fiano', role: 'primary', notes: '캄파니아의 고급 화이트 품종. 피아노 디 아벨리노 DOCG. 복숭아, 견과류, 꿀 풍미.' },
-      { grapeId: 'greco', role: 'secondary', notes: '캄파니아의 화이트 품종. 그레코 디 투포 DOCG. 높은 산도와 미네랄 특성.' },
-      { grapeId: 'negroamaro', role: 'secondary', notes: '풀리아의 토착 적포도 품종. 살리체 살렌티노(Salice Salentino)의 주요 품종.' },
+      { grapeId: 'syrah-shiraz', role: 'permitted', notes: '시칠리아 IGT(테레 시칠리아네) 등에서 국제 품종으로 재배.' },
+      { grapeId: 'chardonnay', role: 'permitted', notes: '시칠리아 등에서 국제 품종 화이트로 재배.' },
     ],
     classifications: [
       {
@@ -294,8 +289,9 @@ export const italyRegions: Region[] = [
       { name: '피아노 디 아벨리노', description: '캄파니아의 고급 화이트 와인. 복숭아, 견과류, 꿀, 미네랄 풍미가 복합적이다.' },
     ],
     keyFacts: [
-      '아글리아니코는 "남부의 바롤로"로 불리며, 타우라시 DOCG의 핵심 품종이다',
-      '프리미티보(Primitivo) = 진판델(Zinfandel) — 유전적으로 동일한 품종이다',
+      '아글리아니코(Aglianico)는 "남부의 바롤로"로 불리며, 높은 탄닌과 산도를 가진 타우라시 DOCG의 핵심 품종이다',
+      '네로 다볼라(Nero d\'Avola)는 시칠리아의 대표 적포도, 네그로아마로(Negroamaro)는 풀리아 살리체 살렌티노의 주품종이다',
+      '프리미티보(Primitivo) = 진판델(Zinfandel). 유전적으로 동일한 품종이다',
       '에트나 DOC는 화산토 테루아로 현재 이탈리아에서 가장 주목받는 지역 중 하나이다',
       '네렐로 마스칼레제는 "시칠리아의 피노 누아"로 비교되기도 한다',
       '피아노(Fiano)와 그레코(Greco)는 캄파니아의 고급 화이트 품종이다',
