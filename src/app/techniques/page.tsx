@@ -44,7 +44,7 @@ const viticultureTopics = [
   {
     title: "포도밭 관리",
     items: [
-      { label: "전정 (Pruning)", desc: "Cane pruning(갱 전정): 서늘한 기후. Spur pruning(짧은가지): 따뜻한 기후" },
+      { label: "전정 (Pruning)", desc: "케인 전정(Cane): 긴 가지를 남겨 유인, 서늘한 지역에 흔한 편. 스퍼 전정(Spur): 코르동 위 짧은 가지를 남김, 기계화에 유리해 따뜻한 지역에 흔한 편" },
       { label: "캐노피 관리", desc: "적엽(Leaf removal), 적과(Green harvesting), 줄기 유인(Shoot positioning)" },
       { label: "관개 (Irrigation)", desc: "EU는 제한/금지 多. 신세계는 Drip irrigation 널리 사용" },
       { label: "유기농/바이오다이나믹", desc: "유기농: 합성 농약·비료 금지. 바이오다이나믹: +천체 달력, 특수 조제물" },

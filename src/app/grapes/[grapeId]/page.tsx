@@ -85,7 +85,7 @@ export default function GrapeDetailPage() {
 
       {/* WSET detail */}
       <Section title="WSET 특성 정리" description="시험 답안에 쓰는 표현 기준입니다.">
-        <dl className="grid grid-cols-[repeat(auto-fit,minmax(9.5rem,1fr))] gap-px overflow-hidden rounded-xl border border-line bg-line">
+        <dl className="flex flex-wrap gap-px overflow-hidden rounded-xl border border-line bg-line">
           {[
             ["바디", c.body],
             ["타닌", c.tannin],
@@ -95,7 +95,7 @@ export default function GrapeDetailPage() {
           ]
             .filter(([, v]) => v)
             .map(([k, v]) => (
-              <div key={k} className="bg-surface p-4">
+              <div key={k} className="grow basis-[9.5rem] bg-surface p-4">
                 <dt className="text-xs text-ink-3">{k}</dt>
                 <dd className="mt-1 text-sm font-semibold text-ink">{v}</dd>
               </div>
@@ -110,7 +110,7 @@ export default function GrapeDetailPage() {
 
       <Section title="주요 산지">
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-          {grape.regions.map((r) => {
+          {grape.regions.map((r, i) => {
             const region = getRegion(r.regionId);
             const body = (
               <>
@@ -124,9 +124,9 @@ export default function GrapeDetailPage() {
               </>
             );
             return region ? (
-              <Card key={r.regionId} href={`/regions/${r.regionId}`}>{body}</Card>
+              <Card key={`${r.regionId}-${i}`} href={`/regions/${r.regionId}`}>{body}</Card>
             ) : (
-              <Card key={r.regionId}>{body}</Card>
+              <Card key={`${r.regionId}-${i}`}>{body}</Card>
             );
           })}
         </div>

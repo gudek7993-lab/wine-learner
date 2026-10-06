@@ -29,14 +29,14 @@ const methods = [
   {
     name: "아스티 방식 (Asti Method)",
     steps: "포도즙에서 1회 발효만 (가압 탱크) → 원하는 알코올·당도에서 중단",
-    characteristics: "매우 아로마틱, 달콤, 낮은 알코올(5.5~6.5%). 무스카 포도",
+    characteristics: "매우 아로마틱하고 달콤, 낮은 알코올. 아스티는 약 7~9.5%, 모스카토 다스티는 약 4.5~6.5%. 모스카토 비앙코 품종",
     wines: ["아스티 DOCG", "모스카토 다스티"],
   },
 ];
 
 const champagneStyles = [
-  { name: "Non-Vintage (NV)", desc: "여러 빈티지 블렌딩. 하우스 스타일 일관성. 최소 15개월 앙금 숙성" },
-  { name: "Vintage", desc: "단일 빈티지. 우수한 해에만 생산. 최소 36개월 앙금 숙성" },
+  { name: "Non-Vintage (NV)", desc: "여러 빈티지 블렌딩. 하우스 스타일 일관성. 출시 전 최소 15개월 숙성, 그중 앙금 숙성 12개월" },
+  { name: "Vintage", desc: "단일 빈티지. 우수한 해에만 생산. 출시 전 최소 3년 숙성" },
   { name: "Blanc de Blancs", desc: "샤르도네 100%. 우아하고 시트러스 풍미. 섬세한 스타일" },
   { name: "Blanc de Noirs", desc: "피노 누아 and/or 피노 뮈니에 100%. 풍부하고 구조감" },
   { name: "Rosé", desc: "블렌딩 방식(적포도주 소량 혼합) 또는 세니에 방식" },
