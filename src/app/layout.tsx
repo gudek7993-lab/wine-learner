@@ -2,18 +2,20 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "@/components/layout/Navigation";
 
+const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const metadata: Metadata = {
   title: "와인 러너 - WSET Level 3 학습 도구",
   description: "와인 지역, 포도 품종, 양조 기법을 인터랙티브하게 학습하세요",
-  manifest: "/manifest.json",
+  manifest: `${base}/manifest.json`,
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "와인 러너",
   },
   icons: {
-    icon: "/icon.svg",
-    apple: "/icon.svg",
+    icon: `${base}/icon.svg`,
+    apple: `${base}/icon.svg`,
   },
 };
 
@@ -41,7 +43,7 @@ export default function RootLayout({
           __html: `
             if ('serviceWorker' in navigator) {
               window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').then(
+                navigator.serviceWorker.register('${base}/sw.js').then(
                   function(registration) {
                     console.log('ServiceWorker registration successful');
                   },

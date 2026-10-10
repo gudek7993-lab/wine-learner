@@ -2,14 +2,14 @@
   "name": "와인 러너 - WSET Level 3",
   "short_name": "와인 러너",
   "description": "WSET Level 3 인터랙티브 학습 도구",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#f6f6f4",
   "theme_color": "#f6f6f4",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/icon.svg",
+      "src": "icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
@@ -20,5 +20,6 @@
     "lifestyle"
   ],
   "lang": "ko-KR",
-  "dir": "ltr"
+  "dir": "ltr",
+  "scope": "./"
 }

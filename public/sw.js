@@ -1,6 +1,7 @@
 // Network-first: always try fresh content, fall back to cache when offline.
-const CACHE_NAME = 'wine-learner-v2';
-const PRECACHE = ['/', '/grapes', '/techniques', '/sparkling', '/fortified', '/tasting', '/quiz'];
+const CACHE_NAME = 'wine-learner-v3';
+// Paths are relative to the worker scope so this works under a GitHub Pages sub-path.
+const PRECACHE = ['./', 'grapes/', 'techniques/', 'sparkling/', 'fortified/', 'tasting/', 'quiz/'];
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
