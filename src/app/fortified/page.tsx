@@ -3,6 +3,8 @@
 import { useState } from "react";
 import PageHeader from "@/components/ui/PageHeader";
 import ExamTipBox from "@/components/detail/ExamTipBox";
+import { OutOfScopeNote } from "@/components/ui/OutOfScope";
+import { fortifiedMuscats } from "@/data/fortified/muscats";
 
 const fortifiedWines = {
   sherry: {
@@ -53,7 +55,9 @@ const fortifiedWines = {
       "빈티지 포트 선언(Declaration)의 의미와 기준을 이해하세요.",
     ],
   },
+  muscat: fortifiedMuscats,
   madeira: {
+    outOfScope: true,
     title: "마데이라 (Madeira)",
     region: "포르투갈 마데이라 섬",
     intro: "가열(Estufagem 또는 Canteiro) 과정이 독특. 캐러멜, 견과류, 산화 풍미. 산화에 매우 강해 개봉 후에도 오래 보관, 100년+ 숙성 가능.",
@@ -107,6 +111,11 @@ export default function FortifiedPage() {
         <div className="space-y-4 lg:col-span-5">
           <div>
             <h2 className="text-2xl font-bold tracking-tight">{wine.title}</h2>
+            {"outOfScope" in wine && (
+              <div className="mt-3">
+                <OutOfScopeNote>WSET Level 3 사양서(2022)에는 마데이라가 없습니다. 참고용으로만 보세요.</OutOfScopeNote>
+              </div>
+            )}
             <p className="mt-1 text-sm text-ink-3">{wine.region}</p>
           </div>
           <p className="leading-relaxed text-ink-2">{wine.intro}</p>

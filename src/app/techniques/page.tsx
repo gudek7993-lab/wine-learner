@@ -2,8 +2,8 @@
 
 import { Plant, Flask } from "@phosphor-icons/react";
 import PageHeader from "@/components/ui/PageHeader";
-import ProcessFlow from "@/components/ui/ProcessFlow";
-import ExamTipBox from "@/components/detail/ExamTipBox";
+import TopicBlock from "@/components/ui/TopicBlock";
+import type { StudyTopic } from "@/data/types";
 
 const viticultureTopics = [
   {
@@ -24,7 +24,7 @@ const viticultureTopics = [
     title: "기후 영향 요인",
     items: [
       { label: "위도 (Latitude)", desc: "적도에서 멀어질수록 기온 하강. 와인 벨트: 북위 30~50°, 남위 30~45°" },
-      { label: "고도 (Altitude)", desc: "100m 상승 시 약 0.6~1°C 하강. 일교차 증가. 예: 멘도사 600~1,500m" },
+      { label: "고도 (Altitude)", desc: "100m 상승할 때마다 약 0.6°C 하강. 일교차 증가. 예: 멘도사 600~1,500m" },
       { label: "해류 (Ocean Currents)", desc: "한류는 냉각(훔볼트, 벵겔라), 난류는 가온(걸프 스트림)" },
       { label: "산맥 (Mountains)", desc: "비그림자 효과로 건조. 예: 알자스(보주 산맥), 워싱턴(캐스케이드)" },
       { label: "안개/해무 (Fog)", desc: "아침 안개로 냉각. 예: 소노마 카운티, 카사블랑카 밸리" },
@@ -37,7 +37,7 @@ const viticultureTopics = [
       { label: "점토 (Clay)", desc: "보수력 높음, 서늘함 유지. 보르도 우안, 포므롤" },
       { label: "석회암 (Limestone)", desc: "배수 우수, 높은 pH. 부르고뉴, 샹파뉴" },
       { label: "편암 (Slate/Schist)", desc: "열 흡수·복사. 모젤, 도우루, 프리오라트" },
-      { label: "화산토 (Volcanic)", desc: "미네랄 풍부, 배수 우수. 에트나, 소아베" },
+      { label: "화산토 (Volcanic)", desc: "배수가 좋고 척박해 수확량이 낮음. 에트나, 소아베" },
     ],
     tip: "WSET Level 3에서는 토양이 '미네랄 풍미'를 준다고 단정짓지 않습니다. 물리적 특성에 집중하세요.",
   },
@@ -68,7 +68,7 @@ const vinificationTopics = [
     content: "수확 → 제경·파쇄 → 발효(과피 침용) → 압착 → 숙성 → 청징·여과 → 병입",
     items: [
       { label: "침용 (Maceration)", desc: "과피에서 색소(안토시아닌), 타닌, 풍미 추출. 핵심 공정" },
-      { label: "발효 온도", desc: "25~30°C. 너무 높으면(35°C+) 효모 사멸 위험" },
+      { label: "발효 온도", desc: "약 20~32°C. 높을수록 색과 타닌 추출이 늘지만, 너무 높으면(35°C 이상) 효모가 죽어 발효가 멈출 위험" },
       { label: "전포도 발효", desc: "줄기 포함 발효. 향신료 풍미, 구조감. 부르고뉴, 론에서 사용" },
       { label: "탄산침용", desc: "CO₂ 환경에서 세포 내 발효. 밝은 과일, 낮은 타닌. 보졸레 누보 대표적" },
     ],
@@ -93,45 +93,10 @@ const vinificationTopics = [
   },
 ];
 
-type Topic = {
-  title: string;
-  content?: string;
-  items?: { label: string; desc: string }[];
-  tip?: string;
-};
-
-function TopicBlock({ topic }: { topic: Topic }) {
-  return (
-    <article className="rounded-xl border border-line bg-surface p-5 md:p-6">
-      <h3 className="text-lg font-bold text-ink">{topic.title}</h3>
-      {topic.content && (
-        <div className="mt-4">
-          {topic.content.includes("→") ? <ProcessFlow steps={topic.content} /> : <p className="text-ink-2">{topic.content}</p>}
-        </div>
-      )}
-      {topic.items && (
-        <dl className="mt-5 grid gap-x-8 gap-y-4 md:grid-cols-2">
-          {topic.items.map((item) => (
-            <div key={item.label}>
-              <dt className="text-sm font-semibold text-ink">{item.label}</dt>
-              <dd className="mt-1 text-sm leading-relaxed text-ink-2">{item.desc}</dd>
-            </div>
-          ))}
-        </dl>
-      )}
-      {topic.tip && (
-        <div className="mt-5">
-          <ExamTipBox text={topic.tip} />
-        </div>
-      )}
-    </article>
-  );
-}
-
 export default function TechniquesPage() {
   const groups = [
-    { id: "viticulture", title: "포도 재배", en: "Viticulture", icon: Plant, topics: viticultureTopics as Topic[] },
-    { id: "vinification", title: "양조", en: "Vinification", icon: Flask, topics: vinificationTopics as Topic[] },
+    { id: "viticulture", title: "포도 재배", en: "Viticulture", icon: Plant, topics: viticultureTopics as StudyTopic[] },
+    { id: "vinification", title: "양조", en: "Vinification", icon: Flask, topics: vinificationTopics as StudyTopic[] },
   ];
 
   return (

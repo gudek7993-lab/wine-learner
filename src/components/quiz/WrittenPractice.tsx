@@ -3,7 +3,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Shuffle, CheckSquare, Square } from "@phosphor-icons/react";
 import ExamTipBox from "@/components/detail/ExamTipBox";
-import { writtenQuestions, type WrittenQuestion } from "@/data/quiz/written-questions";
+import { writtenQuestions as baseWritten, type WrittenQuestion } from "@/data/quiz/written-questions";
+import { lo5WrittenDrills } from "@/data/quiz/lo5-questions";
+
+const writtenQuestions: WrittenQuestion[] = [...baseWritten, ...lo5WrittenDrills];
 
 const STORAGE_KEY = "wine-learner:written-answers";
 

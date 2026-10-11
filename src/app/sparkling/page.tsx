@@ -4,6 +4,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import Section from "@/components/ui/Section";
 import ProcessFlow from "@/components/ui/ProcessFlow";
 import ExamTipBox from "@/components/detail/ExamTipBox";
+import { OutOfScopeBadge } from "@/components/ui/OutOfScope";
 
 const methods = [
   {
@@ -56,7 +57,7 @@ const dosageTable = [
 const otherSparkling = [
   { name: "카바 (Cava)", meta: "스페인, 전통 방식", desc: "마카베오, 사렐로, 파레야다. 최소 9개월 앙금 숙성. 가성비가 뛰어납니다." },
   { name: "크레망 (Crémant)", meta: "프랑스 (샹파뉴 외), 전통 방식", desc: "알자스, 루아르, 부르고뉴 등. 각 지역 품종을 사용합니다." },
-  { name: "프란차코르타 (Franciacorta)", meta: "이탈리아 롬바르디아, 전통 방식", desc: "샤르도네, 피노 누아, 피노 비앙코. 이탈리아 최고급 스파클링입니다." },
+  { name: "프란차코르타 (Franciacorta)", outOfScope: true, meta: "이탈리아 롬바르디아, 전통 방식", desc: "샤르도네, 피노 누아, 피노 비앙코. 이탈리아 최고급 스파클링입니다." },
   { name: "프로세코 (Prosecco)", meta: "이탈리아 베네토, 탱크 방식", desc: "글레라 품종. 가볍고 과일향과 꽃향. Conegliano Valdobbiadene DOCG가 최상위입니다." },
 ];
 
@@ -118,7 +119,10 @@ export default function SparklingPage() {
         <dl className="grid gap-x-10 gap-y-6 md:grid-cols-2">
           {otherSparkling.map((w) => (
             <div key={w.name} className="border-t border-line pt-4">
-              <dt className="font-bold text-ink">{w.name}</dt>
+              <dt className="flex flex-wrap items-center gap-2 font-bold text-ink">
+                {w.name}
+                {"outOfScope" in w && <OutOfScopeBadge />}
+              </dt>
               <dd className="mt-0.5 text-xs text-ink-3">{w.meta}</dd>
               <dd className="mt-2 text-sm leading-relaxed text-ink-2">{w.desc}</dd>
             </div>

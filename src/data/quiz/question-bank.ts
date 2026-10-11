@@ -7,6 +7,8 @@ export interface QuizQuestion {
   correct: number;
   explanation: string;
   tags: string[];
+  /** Not in the WSET L3 specification (Issue 2): shown with a label, never used in mock exams. */
+  outOfScope?: boolean;
 }
 
 export const questionBank: QuizQuestion[] = [
@@ -757,6 +759,7 @@ export const questionBank: QuizQuestion[] = [
     correct: 3,
     explanation: '가장 드라이한 세르시알부터 베르델류, 부알, 말바지아 순으로 달아집니다. 세르시알은 서늘하고 높은 곳에서 재배되어 산도가 매우 높아 드라이 스타일에 잘 맞습니다.',
     tags: ['fortified', 'madeira', 'grapes'],
+    outOfScope: true,
   },
   {
     id: 'fort-3',
@@ -827,6 +830,7 @@ export const questionBank: QuizQuestion[] = [
     correct: 3,
     explanation: '마데이라는 에스투파젬(탱크 가열)이나 칸테이루(따뜻한 창고에서 자연 숙성)로 의도적으로 가열·산화 숙성되어 더 이상 산소에 민감하지 않습니다. 여기에 높은 산도와 강화된 알코올이 더해져 매우 안정적입니다.',
     tags: ['fortified', 'madeira', 'technique'],
+    outOfScope: true,
   },
 
   // 재배학
@@ -1040,6 +1044,7 @@ export const questionBank: QuizQuestion[] = [
     correct: 0,
     explanation: '레드 와인은 숙성되며 색소가 타닌과 결합하고 침전해 퍼플에서 루비, 가넷, 토니 쪽으로 변하므로, 퍼플은 어린 와인임을 보여 줍니다. 오래 숙성했거나 산화 숙성한 와인은 가넷, 토니, 갈색 쪽으로 기웁니다.',
     tags: ['tasting', 'sat', 'appearance'],
+    outOfScope: true,
   },
   {
     id: 'sat-2',
@@ -1050,6 +1055,7 @@ export const questionBank: QuizQuestion[] = [
     correct: 1,
     explanation: 'BLIC는 균형, 여운, 강도, 복합성의 약자로, 구조 요소가 조화롭고 풍미가 진하고 다층적이며 오래 남을수록 품질이 높다고 봅니다. 색의 진하기는 품종이나 스타일을 보여 줄 뿐 품질의 기준이 아닙니다.',
     tags: ['tasting', 'sat', 'quality'],
+    outOfScope: true,
   },
   {
     id: 'sat-3',
@@ -1060,6 +1066,7 @@ export const questionBank: QuizQuestion[] = [
     correct: 2,
     explanation: 'SAT는 스틸 와인 알코올을 낮음(11% 미만), 중간(11~13.9%), 높음(14% 이상)으로 구분합니다. 알코올은 입안의 따뜻한 느낌과 바디에 영향을 주므로 구조를 판단하는 중요한 근거가 됩니다.',
     tags: ['tasting', 'sat', 'palate'],
+    outOfScope: true,
   },
   {
     id: 'sat-4',
@@ -1070,6 +1077,7 @@ export const questionBank: QuizQuestion[] = [
     correct: 3,
     explanation: 'SAT에서 2차 아로마는 알코올 발효 이후의 양조 과정(효모 자가분해, 유산발효, 오크)에서 생긴 향으로, 버터와 크림은 유산발효에서 옵니다. 바나나나 서양배 사탕 같은 알코올 발효 유래 향은 1차, 건과일과 호두 같은 숙성 향은 3차로 분류합니다.',
     tags: ['tasting', 'sat', 'aroma'],
+    outOfScope: true,
   },
   {
     id: 'sat-5',
@@ -1080,6 +1088,7 @@ export const questionBank: QuizQuestion[] = [
     correct: 0,
     explanation: 'Pronounced는 향의 강도(intensity)를 나타내는 용어입니다. 발전 단계는 youthful, developing, fully developed, tired/past its best로 표현하며, 1차 과일 향에서 3차 숙성 향으로 얼마나 옮겨 갔는지를 봅니다.',
     tags: ['tasting', 'sat', 'nose'],
+    outOfScope: true,
   },
 
   // 기타

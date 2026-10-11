@@ -10,8 +10,10 @@ const navItems = [
   { href: "/techniques", label: "재배와 양조" },
   { href: "/sparkling", label: "스파클링" },
   { href: "/fortified", label: "강화 와인" },
+  { href: "/service", label: "서비스" },
   { href: "/tasting", label: "테이스팅" },
-  { href: "/quiz", label: "퀴즈" },
+  { href: "/quiz", label: "연습 문제" },
+  { href: "/mock", label: "모의고사" },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -47,11 +49,11 @@ export default function Navigation() {
           와인 러너
           <span className="ml-1 rounded-full bg-sunken px-2 py-0.5 text-[11px] font-semibold text-ink-3">L3</span>
         </Link>
-        <nav aria-label="주요 메뉴" className="hidden md:flex items-center gap-6">{links}</nav>
+        <nav aria-label="주요 메뉴" className="hidden lg:flex items-center gap-5">{links}</nav>
       </div>
       <nav
         aria-label="주요 메뉴"
-        className="md:hidden flex gap-5 overflow-x-auto scrollbar-hide border-t border-line px-4 py-3 [&_span[aria-hidden]]:hidden"
+        className="lg:hidden flex gap-5 overflow-x-auto scrollbar-hide border-t border-line px-4 py-3 [&_span[aria-hidden]]:hidden"
       >
         {links}
       </nav>

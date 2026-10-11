@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Grains, Flask, Champagne, Drop, Eye, Exam, ArrowRight } from "@phosphor-icons/react";
+import { Grains, Flask, Champagne, Drop, Eye, Exam, ArrowRight, ForkKnife, Timer } from "@phosphor-icons/react";
 import WorldMap from "@/components/map/WorldMap";
 import SearchBar from "@/components/ui/SearchBar";
 import StyleSpectrum from "@/components/grape/StyleSpectrum";
@@ -12,9 +12,11 @@ const studyLinks = [
   { href: "/grapes", icon: Grains, title: "포도 품종", desc: `${allGrapes.length}개 품종의 맛 프로필` },
   { href: "/techniques", icon: Flask, title: "재배와 양조", desc: "기후, 토양, 양조 선택" },
   { href: "/sparkling", icon: Champagne, title: "스파클링", desc: "전통 방식과 탱크 방식" },
-  { href: "/fortified", icon: Drop, title: "강화 와인", desc: "셰리, 포트, 마데이라" },
+  { href: "/fortified", icon: Drop, title: "강화 와인", desc: "셰리, 포트, 강화 뮈스카" },
+  { href: "/service", icon: ForkKnife, title: "서비스와 페어링", desc: "보관, 서비스, 결함, 음식" },
   { href: "/tasting", icon: Eye, title: "SAT 테이스팅", desc: "체계적 테이스팅 접근법" },
-  { href: "/quiz", icon: Exam, title: "연습 퀴즈", desc: "랜덤 10문제와 해설" },
+  { href: "/quiz", icon: Exam, title: "연습 문제", desc: "객관식과 서술형 연습" },
+  { href: "/mock", icon: Timer, title: "모의고사", desc: "실전 형식 2시간 시험" },
 ];
 
 export default function HomePage() {

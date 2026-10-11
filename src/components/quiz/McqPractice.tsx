@@ -3,7 +3,18 @@
 import { useState, useEffect } from "react";
 import { CheckCircle, XCircle, ArrowClockwise } from "@phosphor-icons/react";
 import Badge from "@/components/ui/Badge";
-import { getRandomQuestions, questionBank, type QuizQuestion } from "@/data/quiz/question-bank";
+import { OutOfScopeBadge } from "@/components/ui/OutOfScope";
+import type { QuizQuestion } from "@/data/quiz/question-bank";
+import { allMcq } from "@/lib/exam";
+
+function getRandomQuestions(n: number): QuizQuestion[] {
+  const a = [...allMcq];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a.slice(0, n);
+}
 
 const QUESTIONS_PER_QUIZ = 10;
 const difficultyLabel = { easy: "쉬움", medium: "보통", hard: "어려움" } as const;
@@ -36,7 +47,8 @@ function QuestionCard({
         <span className="font-bold tabular-nums text-ink-2">문제 {index + 1}</span>
         <span aria-hidden>/</span>
         <span>{q.category}</span>
-        <Badge className="ml-auto">{difficultyLabel[q.difficulty]}</Badge>
+        {q.outOfScope && <OutOfScopeBadge className="ml-auto" />}
+        <Badge className={q.outOfScope ? "" : "ml-auto"}>{difficultyLabel[q.difficulty]}</Badge>
       </div>
       <h2 className="mt-3 text-lg font-semibold leading-snug text-ink">{q.question}</h2>
 
@@ -106,7 +118,7 @@ export default function McqPractice() {
     <div className="space-y-10">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <p className="max-w-[60ch] text-ink-2">
-          문제 은행 {questionBank.length}문항에서 매번 {QUESTIONS_PER_QUIZ}문항을 무작위로 냅니다. 보기를 고르면 바로 해설이 나옵니다.
+          문제 은행 {allMcq.length}문항에서 매번 {QUESTIONS_PER_QUIZ}문항을 무작위로 냅니다. 보기를 고르면 바로 해설이 나옵니다.
         </p>
         <button
           onClick={loadNewQuiz}
@@ -118,7 +130,7 @@ export default function McqPractice() {
       </div>
 
       {/* Progress */}
-      <div className="sticky top-[7.25rem] z-10 -mx-4 bg-paper/90 px-4 py-3 backdrop-blur-md md:top-16">
+      <div className="sticky top-[7.25rem] z-10 -mx-4 bg-paper/90 px-4 py-3 backdrop-blur-md lg:top-16">
         <div className="flex items-center justify-between text-sm">
           <span className="text-ink-2">
             <span className="font-semibold tabular-nums text-ink">{answeredCount}</span> / {questions.length || QUESTIONS_PER_QUIZ} 풀이

@@ -154,3 +154,19 @@ export interface GrapeProfile {
   origin: string;
   synonyms?: string[];
 }
+
+/** A study topic block rendered by the topic pages (techniques, service). */
+export interface StudyTopic {
+  title: string;
+  /** Optional lead text; a string containing "→" renders as a step flow. */
+  content?: string;
+  items?: { label: string; desc: string }[];
+  tip?: string;
+}
+
+export interface StudyGroup {
+  id: string;
+  title: string;
+  en: string;
+  topics: StudyTopic[];
+}
