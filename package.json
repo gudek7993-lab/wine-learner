@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "build:pages": "node scripts/build-pages.mjs",
-    "deploy": "npm run build:pages && gh-pages -d out -t -m \"Deploy to GitHub Pages\""
+    "deploy": "npm run build:pages && node scripts/publish-pages.mjs"
   },
   "keywords": [],
   "author": "",
@@ -29,7 +29,6 @@
     "@types/react": "^19.2.14",
     "@types/topojson-client": "^3.1.5",
     "eslint": "^10.0.0",
-    "gh-pages": "^6.3.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.2.0",
     "typescript": "^5.9.3"
