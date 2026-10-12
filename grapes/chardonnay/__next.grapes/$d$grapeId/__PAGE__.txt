@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
-2:I[85775,["/wine-learner/_next/static/chunks/000d93b31ad406e2.js","/wine-learner/_next/static/chunks/3b1a217949f16a8a.js","/wine-learner/_next/static/chunks/41ed3c4722f6403b.js"],"default"]
+2:I[85775,["/wine-learner/_next/static/chunks/000d93b31ad406e2.js","/wine-learner/_next/static/chunks/3b1a217949f16a8a.js","/wine-learner/_next/static/chunks/d7e1d37b187d27c6.js"],"default"]
 3:I[62101,["/wine-learner/_next/static/chunks/a6e2cbdb7582f73f.js","/wine-learner/_next/static/chunks/c32bb1b6207a56c0.js"],"OutletBoundary"]
 4:"$Sreact.suspense"
-0:{"buildId":"5pOAF5zWlEhur3IMN7z5a","rsc":["$","$1","c",{"children":[["$","$L2",null,{"grapeId":"chardonnay"}],[["$","script","script-0",{"src":"/wine-learner/_next/static/chunks/3b1a217949f16a8a.js","async":true}],["$","script","script-1",{"src":"/wine-learner/_next/static/chunks/41ed3c4722f6403b.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"t33b51dtXnICiM1Wrc-Fh","rsc":["$","$1","c",{"children":[["$","$L2",null,{"grapeId":"chardonnay"}],[["$","script","script-0",{"src":"/wine-learner/_next/static/chunks/3b1a217949f16a8a.js","async":true}],["$","script","script-1",{"src":"/wine-learner/_next/static/chunks/d7e1d37b187d27c6.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
 5:null
