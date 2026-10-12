@@ -9,7 +9,7 @@ import Tabs from "@/components/ui/Tabs";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import ExamTipBox from "@/components/detail/ExamTipBox";
-import FranceRegionMap from "@/components/map/FranceRegionMap";
+import CountryRegionMap from "@/components/map/CountryRegionMap";
 import type { Region } from "@/data/types";
 
 const roleLabel = { primary: "주요 품종", secondary: "보조 품종", permitted: "허용 품종" } as const;
@@ -20,9 +20,38 @@ function grapeDot(grapeId: string) {
 }
 
 function Overview({ region }: { region: Region }) {
+  if (region.keyFacts.length === 0 && region.examTips.length === 0) {
+    return <p className="text-ink-3">하위 산지와 다른 탭에 내용이 정리되어 있습니다.</p>;
+  }
   return (
-    <div className="grid gap-10 lg:grid-cols-12">
-      <div className="space-y-8 lg:col-span-7">
+    <div className="space-y-8">
+      {region.keyFacts.length > 0 && (
+        <section>
+          <h3 className="font-bold">핵심 정리</h3>
+          <ol className="mt-4 grid gap-x-10 gap-y-3 md:grid-cols-2">
+            {region.keyFacts.map((fact, i) => (
+              <li key={i} className="flex gap-3 text-sm leading-relaxed text-ink-2">
+                <span className="mt-0.5 w-4 shrink-0 text-xs font-semibold tabular-nums text-accent">{i + 1}</span>
+                {fact}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+      {region.examTips.length > 0 && (
+        <div className="space-y-3">
+          {region.examTips.map((tip, i) => (
+            <ExamTipBox key={i} text={tip} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ClimateSoil({ region }: { region: Region }) {
+  return (
+    <div className="max-w-3xl space-y-8">
         <section>
           <h3 className="text-sm font-semibold text-ink-3">기후</h3>
           <div className="mt-2 flex flex-wrap gap-1.5">
@@ -57,31 +86,38 @@ function Overview({ region }: { region: Region }) {
             </ul>
           </section>
         )}
+    </div>
+  );
+}
+
+function SubRegions({ region, subs }: { region: Region; subs: Region[] }) {
+  return (
+    <div className="space-y-5">
+      <CountryRegionMap countryId={region.id} />
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {subs.map((child) => (
+          <Card key={child.id} href={`/regions/${child.id}`} className="flex flex-col">
+            <div className="flex items-baseline justify-between gap-3">
+              <h3 className="font-bold text-ink">{child.nameKo}</h3>
+              <span className="truncate text-xs text-ink-3">{child.nameEn}</span>
+            </div>
+            <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-2">
+              {child.summary ?? child.keyFacts[0] ?? child.climate.description}
+            </p>
+            <div className="mt-auto flex flex-wrap gap-x-3 gap-y-1 pt-4">
+              {child.grapes.slice(0, 3).map((g) => {
+                const grape = getGrape(g.grapeId);
+                return grape ? (
+                  <span key={g.grapeId} className="inline-flex items-center gap-1.5 text-xs text-ink-3">
+                    <span aria-hidden className="h-2 w-2 rounded-full" style={{ backgroundColor: grapeDot(g.grapeId) }} />
+                    {grape.nameKo}
+                  </span>
+                ) : null;
+              })}
+            </div>
+          </Card>
+        ))}
       </div>
-
-      {region.keyFacts.length > 0 && (
-        <aside className="lg:col-span-5">
-          <div className="rounded-xl border border-line bg-surface p-5">
-            <h3 className="font-bold">핵심 정리</h3>
-            <ul className="mt-4 space-y-3">
-              {region.keyFacts.map((fact, i) => (
-                <li key={i} className="flex gap-3 text-sm leading-relaxed text-ink-2">
-                  <span className="mt-0.5 w-4 shrink-0 text-xs font-semibold tabular-nums text-accent">{i + 1}</span>
-                  {fact}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </aside>
-      )}
-
-      {region.examTips.length > 0 && (
-        <div className="space-y-3 lg:col-span-12">
-          {region.examTips.map((tip, i) => (
-            <ExamTipBox key={i} text={tip} />
-          ))}
-        </div>
-      )}
     </div>
   );
 }
@@ -180,12 +216,12 @@ export default function RegionView({ regionId }: { regionId: string }) {
 
   const tabs = [
     { label: "개요", content: <Overview region={region} /> },
+    ...(children.length > 0 ? [{ label: `하위 산지 ${children.length}`, content: <SubRegions region={region} subs={children} /> }] : []),
+    { label: "기후와 토양", content: <ClimateSoil region={region} /> },
     { label: "포도 품종", content: <Grapes region={region} /> },
     { label: "와인 스타일", content: <Styles region={region} /> },
+    ...(region.classifications?.length ? [{ label: "등급 체계", content: <Classifications region={region} /> }] : []),
   ];
-  if (region.classifications && region.classifications.length > 0) {
-    tabs.push({ label: "등급 체계", content: <Classifications region={region} /> });
-  }
 
   return (
     <div className="space-y-12">
@@ -220,40 +256,6 @@ export default function RegionView({ regionId }: { regionId: string }) {
 
       <Tabs tabs={tabs} />
 
-      {children.length > 0 && (
-        <section className="border-t border-line pt-12">
-          <h2 className="text-xl font-bold tracking-tight">하위 산지</h2>
-          {regionId === "france" && (
-            <div className="mt-5">
-              <FranceRegionMap />
-            </div>
-          )}
-          <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {children.map((child) => (
-              <Card key={child.id} href={`/regions/${child.id}`} className="flex flex-col">
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="font-bold text-ink">{child.nameKo}</h3>
-                  <span className="truncate text-xs text-ink-3">{child.nameEn}</span>
-                </div>
-                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-2">
-                  {child.summary ?? child.keyFacts[0] ?? child.climate.description}
-                </p>
-                <div className="mt-auto flex flex-wrap gap-x-3 gap-y-1 pt-4">
-                  {child.grapes.slice(0, 3).map((g) => {
-                    const grape = getGrape(g.grapeId);
-                    return grape ? (
-                      <span key={g.grapeId} className="inline-flex items-center gap-1.5 text-xs text-ink-3">
-                        <span aria-hidden className="h-2 w-2 rounded-full" style={{ backgroundColor: grapeDot(g.grapeId) }} />
-                        {grape.nameKo}
-                      </span>
-                    ) : null;
-                  })}
-                </div>
-              </Card>
-            ))}
-          </div>
-        </section>
-      )}
     </div>
   );
 }

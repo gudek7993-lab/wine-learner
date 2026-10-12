@@ -25,6 +25,7 @@ export const argentinaRegions: Region[] = [
       { grapeId: 'pinot-noir', role: 'secondary', notes: '파타고니아와 우코 밸리의 높은 지대.' },
       { grapeId: 'chardonnay', role: 'secondary', notes: '우코 밸리의 고지대에서 고품질.' },
       { grapeId: 'sauvignon-blanc', role: 'permitted', notes: '서늘한 고지대.' },
+      { grapeId: 'torrontes', role: 'primary', notes: '아르헨티나의 대표 화이트' },
     ],
     classifications: [
       {
@@ -77,6 +78,7 @@ export const argentinaRegions: Region[] = [
     grapes: [
       { grapeId: 'malbec', role: 'primary', notes: '강한 자외선으로 껍질이 두꺼워져 색과 타닌이 매우 진하다.' },
       { grapeId: 'cabernet-sauvignon', role: 'secondary', notes: '진하고 구조감 있는 스타일.' },
+      { grapeId: 'torrontes', role: 'primary', notes: '카파야테, 고지대' },
     ],
     classifications: [
       { name: '칼차키 계곡 (Valles Calchaquíes)', description: '살타, 투쿠만, 카타마르카에 걸친 고지대 계곡. 카파야테(Cafayate)가 중심 마을이다.' },
@@ -115,6 +117,7 @@ export const argentinaRegions: Region[] = [
       { grapeId: 'cabernet-sauvignon', role: 'secondary' },
       { grapeId: 'chardonnay', role: 'secondary', notes: '우코 밸리 고지대.' },
       { grapeId: 'syrah-shiraz', role: 'permitted' },
+      { grapeId: 'torrontes', role: 'secondary', notes: '더 단순한 스타일' },
     ],
     classifications: [
       {

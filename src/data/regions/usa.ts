@@ -27,6 +27,7 @@ export const usaRegions: Region[] = [
       { grapeId: 'sauvignon-blanc', role: 'secondary', notes: '나파와 소노마. 오크 숙성한 스타일은 퓌메 블랑(Fumé Blanc)이라고도 부른다.' },
       { grapeId: 'riesling', role: 'secondary', notes: '워싱턴과 뉴욕 핑거 레이크스.' },
       { grapeId: 'pinot-grigio-gris', role: 'secondary', notes: '오리건의 대표 화이트(피노 그리).' },
+      { grapeId: 'zinfandel', role: 'primary', notes: '캘리포니아의 대표 헤리티지 품종' },
     ],
     classifications: [
       {
@@ -136,6 +137,7 @@ export const usaRegions: Region[] = [
       { grapeId: 'cabernet-sauvignon', role: 'primary', notes: '알렉산더 밸리 등 따뜻한 내륙.' },
       { grapeId: 'sauvignon-blanc', role: 'secondary' },
       { grapeId: 'merlot', role: 'secondary' },
+      { grapeId: 'zinfandel', role: 'primary', notes: '드라이 크릭 밸리 올드 바인' },
     ],
     classifications: [
       {
@@ -184,6 +186,7 @@ export const usaRegions: Region[] = [
       { grapeId: 'syrah-shiraz', role: 'secondary', notes: '파소 로블스, 산타 바바라의 론 스타일.' },
       { grapeId: 'grenache', role: 'secondary', notes: '파소 로블스의 론 블렌드.' },
       { grapeId: 'cabernet-sauvignon', role: 'secondary', notes: '파소 로블스.' },
+      { grapeId: 'zinfandel', role: 'secondary', notes: '파소 로블레스' },
     ],
     classifications: [
       {
@@ -319,6 +322,7 @@ export const usaRegions: Region[] = [
       { grapeId: 'chardonnay', role: 'secondary' },
       { grapeId: 'pinot-noir', role: 'secondary' },
       { grapeId: 'merlot', role: 'secondary', notes: '롱아일랜드.' },
+      { grapeId: 'vidal', role: 'secondary', notes: '내한성 교배종, 아이스와인과 늦수확' },
     ],
     classifications: [
       { name: '주요 AVA', description: '핑거 레이크스(Finger Lakes), 롱아일랜드(Long Island), 허드슨 리버 등.' },

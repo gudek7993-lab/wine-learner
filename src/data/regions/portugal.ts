@@ -21,6 +21,7 @@ export const portugalRegions: Region[] = [
       { grapeId: 'tempranillo', role: 'secondary', notes: '도우루에서는 틴타 로리즈(Tinta Roriz), 알렌테주에서는 아라고네즈(Aragonez)라 부른다. 블렌드에 과일 풍미와 구조를 더한다.' },
       { grapeId: 'albarino', role: 'primary', notes: '알바리뉴(Alvarinho). 비뉴 베르데 북부 몬사웅 이 멜가수(Monção e Melgaço)의 최고 품종. 스페인의 알바리뇨와 동일.' },
       { grapeId: 'syrah-shiraz', role: 'permitted', notes: '알렌테주와 리스보아 등 남부에서 국제 품종으로 재배.' },
+      { grapeId: 'touriga-nacional', role: 'primary', notes: '포르투갈 대표 품종, 당에서도 중요' },
     ],
     classifications: [
       {
@@ -70,6 +71,7 @@ export const portugalRegions: Region[] = [
     ],
     grapes: [
       { grapeId: 'tempranillo', role: 'primary', notes: '틴타 로리즈(Tinta Roriz). 템프라니요의 도우루 이름. 풍부한 과일 풍미와 구조감을 제공한다.' },
+      { grapeId: 'touriga-nacional', role: 'primary', notes: '포트와 드라이 레드' },
     ],
     classifications: [
       { name: 'DOC 구분', description: '같은 지역에서 주정강화 와인은 포르투(Porto) DOC, 비주정강화 와인은 도우루(Douro) DOC로 표기한다.' },
@@ -149,6 +151,7 @@ export const portugalRegions: Region[] = [
       { grapeId: 'tempranillo', role: 'primary', notes: '아라고네즈(Aragonez). 템프라니요의 알렌테주 현지 이름. 풍부한 과일 풍미의 와인을 생산한다.' },
       { grapeId: 'syrah-shiraz', role: 'secondary', notes: '더운 기후에 잘 적응해 블렌드와 단일 품종 와인에 사용된다.' },
       { grapeId: 'cabernet-sauvignon', role: 'permitted', notes: '비뉴 헤지오날 알렌테자누 와인의 블렌딩에 사용.' },
+      { grapeId: 'touriga-nacional', role: 'secondary', notes: '블렌드' },
     ],
     wineStyles: [
       { name: '알렌테주 레드', description: '풍부하고 과일 향이 진한 미디엄~풀 바디 레드 와인. 따뜻한 기후에서 오는 잘 익은 과일 풍미와 부드러운 탄닌이 특징이다. 가성비가 좋은 와인으로 인기가 높다.' },

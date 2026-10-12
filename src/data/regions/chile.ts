@@ -28,6 +28,8 @@ export const chileRegions: Region[] = [
       { grapeId: 'chardonnay', role: 'primary', notes: '카사블랑카, 리마리 등 해안과 북부 지역.' },
       { grapeId: 'riesling', role: 'permitted', notes: '비오비오 등 남부 지역.' },
       { grapeId: 'gewurztraminer', role: 'permitted', notes: '비오비오 등 남부 지역.' },
+      { grapeId: 'carignan', role: 'permitted', notes: '마울레의 건지 농법 올드 바인' },
+      { grapeId: 'carmenere', role: 'primary', notes: '칠레의 대표 품종' },
     ],
     classifications: [
       {
@@ -168,6 +170,7 @@ export const chileRegions: Region[] = [
       { grapeId: 'merlot', role: 'secondary', notes: '보르도 블렌드.' },
       { grapeId: 'syrah-shiraz', role: 'secondary' },
       { grapeId: 'chardonnay', role: 'permitted' },
+      { grapeId: 'carmenere', role: 'secondary' },
     ],
     classifications: [
       {
@@ -214,6 +217,7 @@ export const chileRegions: Region[] = [
       { grapeId: 'merlot', role: 'secondary' },
       { grapeId: 'malbec', role: 'secondary', notes: '블렌딩에 사용.' },
       { grapeId: 'grenache', role: 'permitted', notes: '론 스타일 블렌드.' },
+      { grapeId: 'carmenere', role: 'primary' },
     ],
     classifications: [
       { name: '라펠 밸리 (Rapel Valley)', description: '센트럴 밸리 지역에 속하며, 북쪽의 카차포알(Cachapoal)과 남쪽의 콜차과(Colchagua) 두 하위 지역으로 나뉜다.' },

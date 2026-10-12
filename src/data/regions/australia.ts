@@ -104,6 +104,7 @@ export const australiaRegions: Region[] = [
       { grapeId: 'grenache', role: 'primary', notes: '올드 바인 그르나슈. 단독 또는 GSM 블렌드(그르나슈, 시라즈, 무르베드르)로 사용.' },
       { grapeId: 'cabernet-sauvignon', role: 'secondary', notes: '단독 또는 시라즈와 블렌딩(호주 특유의 카베르네-시라즈 블렌드).' },
       { grapeId: 'semillon', role: 'secondary', notes: '전통적인 화이트 품종.' },
+      { grapeId: 'mourvedre', role: 'secondary', notes: '마타로, GSM 블렌드' },
     ],
     classifications: [
       {
@@ -225,6 +226,7 @@ export const australiaRegions: Region[] = [
       { grapeId: 'syrah-shiraz', role: 'primary', notes: '대표 품종. 풍만하고 진한 시라즈, 다크 초콜릿 풍미로 알려져 있다.' },
       { grapeId: 'grenache', role: 'primary', notes: '올드 바인 그르나슈가 특히 유명하다.' },
       { grapeId: 'cabernet-sauvignon', role: 'secondary', notes: '구조감 있는 레드.' },
+      { grapeId: 'mourvedre', role: 'secondary', notes: '마타로, GSM 블렌드' },
     ],
     classifications: [],
     wineStyles: [

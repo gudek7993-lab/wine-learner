@@ -24,6 +24,8 @@ export const italyRegions: Region[] = [
       { grapeId: 'cabernet-sauvignon', role: 'secondary', notes: '볼게리 등 토스카나 해안의 슈퍼 투스칸 블렌드에 사용.' },
       { grapeId: 'merlot', role: 'secondary', notes: '슈퍼 투스칸 블렌드와 북동부의 레드에 사용.' },
       { grapeId: 'chardonnay', role: 'secondary', notes: '프란차코르타(Franciacorta) 전통 방식 스파클링의 주품종.' },
+      { grapeId: 'montepulciano', role: 'secondary', notes: '아브루초와 마르케 (비노 노빌레 디 몬테풀차노와 다름)' },
+      { grapeId: 'trebbiano', role: 'secondary', notes: '중부 이탈리아에 널리 재배, 오르비에토 등' },
     ],
     classifications: [
       {
@@ -77,6 +79,10 @@ export const italyRegions: Region[] = [
     ],
     grapes: [
       { grapeId: 'nebbiolo', role: 'primary', notes: '바롤로 DOCG와 바르바레스코 DOCG의 유일한 품종. 높은 탄닌과 산도, 타르와 장미 향이 특징적이다.' },
+      { grapeId: 'barbera', role: 'primary', notes: '바르베라 다스티, 바르베라 달바, 니차' },
+      { grapeId: 'dolcetto', role: 'secondary', notes: '돌체토 달바, 돌리아니' },
+      { grapeId: 'cortese', role: 'secondary', notes: '가비 DOCG는 코르테제 100%' },
+      { grapeId: 'muscat', role: 'secondary', notes: '아스티, 모스카토 다스티 (모스카토 비앙코)' },
     ],
     classifications: [
       {
@@ -143,6 +149,7 @@ export const italyRegions: Region[] = [
       { grapeId: 'sangiovese', role: 'primary', notes: '토스카나의 대표 품종. 키안티 클라시코, 브루넬로 디 몬탈치노, 비노 노빌레 디 몬테풀치아노의 핵심 품종. 높은 산도와 탄닌, 체리와 허브 풍미가 특징적이다.' },
       { grapeId: 'cabernet-sauvignon', role: 'secondary', notes: '슈퍼 투스칸의 핵심 품종. 사시카이아(Sassicaia)가 대표적이다.' },
       { grapeId: 'merlot', role: 'secondary', notes: '슈퍼 투스칸 블렌딩에 사용. 마세토(Masseto)가 대표적인 100% 메를로 슈퍼 투스칸이다.' },
+      { grapeId: 'trebbiano', role: 'secondary', notes: '빈 산토와 화이트 블렌드' },
     ],
     classifications: [
       {
@@ -206,6 +213,8 @@ export const italyRegions: Region[] = [
     grapes: [
       { grapeId: 'pinot-grigio-gris', role: 'secondary', notes: '피노 그리지오. 베네토 평지에서 가볍고 중성적인 드라이 화이트로 대량 생산된다.' },
       { grapeId: 'merlot', role: 'permitted', notes: '평지의 IGT, DOC 레드에 사용.' },
+      { grapeId: 'corvina', role: 'primary', notes: '발폴리첼라, 리파소, 아마로네, 바르돌리노' },
+      { grapeId: 'garganega', role: 'primary', notes: '소아베, 소아베 클라시코, 레초토 디 소아베' },
     ],
     classifications: [
       {
@@ -271,6 +280,10 @@ export const italyRegions: Region[] = [
     grapes: [
       { grapeId: 'syrah-shiraz', role: 'permitted', notes: '시칠리아 IGT(테레 시칠리아네) 등에서 국제 품종으로 재배.' },
       { grapeId: 'chardonnay', role: 'permitted', notes: '시칠리아 등에서 국제 품종 화이트로 재배.' },
+      { grapeId: 'zinfandel', role: 'primary', notes: '풀리아의 프리미티보 디 만두리아' },
+      { grapeId: 'aglianico', role: 'primary', notes: '타우라시 DOCG, 알리아니코 델 불투레' },
+      { grapeId: 'negroamaro', role: 'primary', notes: '살리체 살렌티노' },
+      { grapeId: 'nero-d-avola', role: 'primary', notes: '시칠리아, 체라수올로 디 비토리아' },
     ],
     classifications: [
       {

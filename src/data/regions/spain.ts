@@ -22,6 +22,7 @@ export const spainRegions: Region[] = [
       { grapeId: 'grenache', role: 'primary', notes: '가르나차(Garnacha). 스페인 북동부가 원산으로 알려져 있다. 프리오랏, 나바라, 리오하 오리엔탈의 핵심 품종. 높은 알코올과 풍부한 붉은 과일 풍미.' },
       { grapeId: 'albarino', role: 'primary', notes: '리아스 바이사스의 대표 화이트 품종. 높은 산도와 복숭아, 살구 풍미.' },
       { grapeId: 'cabernet-sauvignon', role: 'permitted', notes: '리베라 델 두에로, 페네데스 등에서 블렌딩용으로 소량 재배.' },
+      { grapeId: 'mourvedre', role: 'secondary', notes: '모나스트렐: 후미야, 예클라, 알리칸테' },
     ],
     classifications: [
       {
@@ -88,6 +89,8 @@ export const spainRegions: Region[] = [
     grapes: [
       { grapeId: 'tempranillo', role: 'primary', notes: '리오하의 핵심 품종. 전체 블렌딩의 주축을 이루며, 체리, 자두, 가죽, 바닐라 풍미를 제공한다.' },
       { grapeId: 'grenache', role: 'secondary', notes: '가르나차. 템프라니요와 블렌딩하여 풍부함과 알코올을 더한다. 리오하 오리엔탈에서 주로 재배한다.' },
+      { grapeId: 'carignan', role: 'permitted', notes: '마수엘로' },
+      { grapeId: 'graciano', role: 'permitted', notes: '산도, 색, 향을 더함' },
     ],
     classifications: [
       {
@@ -180,6 +183,7 @@ export const spainRegions: Region[] = [
       { grapeId: 'grenache', role: 'primary', notes: '가르나차(Garnacha). 프리오랏의 핵심 품종. 오래된 관목형 포도나무(bush vine)에서 극도로 낮은 수확량으로 농축된 와인을 생산한다.' },
       { grapeId: 'cabernet-sauvignon', role: 'permitted', notes: '일부 생산자가 블렌딩에 사용' },
       { grapeId: 'syrah-shiraz', role: 'permitted', notes: '일부 생산자가 블렌딩에 사용' },
+      { grapeId: 'carignan', role: 'secondary', notes: '카리녜나(삼소), 가르나차와 블렌딩' },
     ],
     wineStyles: [
       { name: '프리오랏 레드', description: '가르나차와 카리녜나 중심의 매우 농축되고 파워풀한 레드 와인. 높은 알코올(14-16%), 진한 색상, 검은 과일, 미네랄, 향신료 풍미. 리코렐라 토양에서 오는 독특한 미네랄 특성이 있다.' },
@@ -216,6 +220,7 @@ export const spainRegions: Region[] = [
     ],
     grapes: [
       { grapeId: 'sauvignon-blanc', role: 'secondary', notes: '베르데호와 블렌딩하거나 단독으로 사용한다.' },
+      { grapeId: 'verdejo', role: 'primary', notes: '루에다의 대표 품종' },
     ],
     wineStyles: [
       { name: '루에다 베르데호', description: '상쾌하고 허브 향이 풍부한 드라이 화이트 와인. 시트러스, 회향, 풀 향이 특징적이며, 약간의 쓴 아몬드 뉘앙스가 있다. 대부분 무오크로 신선하게 만들어 일찍 마신다.' },

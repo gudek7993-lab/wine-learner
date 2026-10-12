@@ -98,6 +98,8 @@ export const franceRegions: Region[] = [
       { grapeId: 'merlot', role: 'primary', notes: '보르도에서 가장 많이 재배되는 품종. 우안 블렌드의 중심이며 부드러운 타닌과 자두 풍미를 더한다.' },
       { grapeId: 'sauvignon-blanc', role: 'secondary', notes: '드라이 화이트(앙트르 되 메르, 페삭 레오냥)와 스위트 와인에 산도와 향을 더한다.' },
       { grapeId: 'semillon', role: 'secondary', notes: '소테른의 핵심. 얇은 껍질로 귀부병에 잘 걸리며 바디와 숙성력을 더한다.' },
+      { grapeId: 'cabernet-franc', role: 'secondary', notes: '보르도 블렌드의 세 번째 품종' },
+      { grapeId: 'muscadelle', role: 'permitted', notes: '드라이 화이트 블렌드에 소량' },
     ],
     classifications: [
       {
@@ -152,6 +154,7 @@ export const franceRegions: Region[] = [
       { grapeId: 'merlot', role: 'secondary', notes: '블렌드에 부드러움과 과일 풍미를 더한다.' },
       { grapeId: 'sauvignon-blanc', role: 'secondary', notes: '페삭 레오냥과 그라브의 드라이 화이트.' },
       { grapeId: 'semillon', role: 'secondary', notes: '페삭 레오냥과 그라브의 드라이 화이트 블렌드.' },
+      { grapeId: 'cabernet-franc', role: 'permitted', notes: '메독 블렌드의 소량 구성 품종' },
     ],
     classifications: [],
     wineStyles: [
@@ -189,6 +192,7 @@ export const franceRegions: Region[] = [
     grapes: [
       { grapeId: 'merlot', role: 'primary', notes: '블렌드의 중심. 점토에서 풍만하고 부드러운 와인을 만든다.' },
       { grapeId: 'cabernet-sauvignon', role: 'permitted', notes: '차가운 점토 토양에서 잘 익지 않아 비중이 작다.' },
+      { grapeId: 'cabernet-franc', role: 'secondary', notes: '생테밀리옹에서 메를로와 블렌딩' },
     ],
     classifications: [
       { name: '생테밀리옹 등급', description: '약 10년마다 개정. 프리미에 그랑 크뤼 클라세 A, B와 그랑 크뤼 클라세.' },
@@ -226,6 +230,7 @@ export const franceRegions: Region[] = [
     grapes: [
       { grapeId: 'semillon', role: 'primary', notes: '얇은 껍질로 귀부병에 잘 걸린다. 블렌드의 대부분을 차지하며 바디와 질감을 준다.' },
       { grapeId: 'sauvignon-blanc', role: 'secondary', notes: '산도와 신선한 향을 더한다. 뮈스카델(Muscadelle)도 소량 사용.' },
+      { grapeId: 'muscadelle', role: 'permitted', notes: '소테른, 바르삭의 소량 블렌드' },
     ],
     classifications: [
       { name: '1855 소테른/바르삭 등급', description: '샤토 디켐(Yquem)이 유일한 프리미에 크뤼 쉬페리외르. 그 아래 1등급과 2등급.' },
@@ -320,6 +325,9 @@ export const franceRegions: Region[] = [
       { grapeId: 'syrah-shiraz', role: 'primary', notes: '북부 론 레드의 유일한 적포도 품종. 남부 블렌드에서는 색과 구조를 더한다.' },
       { grapeId: 'grenache', role: 'primary', notes: '남부 론의 주품종. 높은 알코올, 붉은 과일, 향신료 풍미.' },
       { grapeId: 'viognier', role: 'secondary', notes: '콩드리외와 샤토 그리예의 품종. 코트 로티 레드에 최대 20%까지 혼합 가능.' },
+      { grapeId: 'mourvedre', role: 'secondary', notes: 'GSM 블렌드의 M' },
+      { grapeId: 'cinsault', role: 'permitted', notes: '남부 론 블렌드와 타벨 로제' },
+      { grapeId: 'muscat', role: 'secondary', notes: '뮈스카 드 봄 드 브니즈 VDN' },
     ],
     classifications: [
       {
@@ -372,6 +380,7 @@ export const franceRegions: Region[] = [
       { grapeId: 'gewurztraminer', role: 'primary', notes: '리치, 장미, 향신료 향. 풀 바디, 낮은 산도. 오프드라이인 경우가 많다.' },
       { grapeId: 'pinot-grigio-gris', role: 'primary', notes: '피노 그리. 복숭아, 꿀, 스모키한 풍미의 풀 바디 화이트.' },
       { grapeId: 'pinot-noir', role: 'secondary', notes: '알자스의 유일한 주요 적포도 품종. 레드와 로제, 크레망에 사용.' },
+      { grapeId: 'muscat', role: 'secondary', notes: '고귀한 품종 중 하나, 주로 드라이' },
     ],
     classifications: [
       {
@@ -431,6 +440,8 @@ export const franceRegions: Region[] = [
     grapes: [
       { grapeId: 'sauvignon-blanc', role: 'primary', notes: '중부의 상세르, 푸이 퓌메. 높은 산도, 풀, 구스베리, 부싯돌 같은 미네랄.' },
       { grapeId: 'chenin-blanc', role: 'primary', notes: '앙주-소뮈르와 투렌. 드라이부터 스위트, 스파클링까지 모든 스타일.' },
+      { grapeId: 'cabernet-franc', role: 'primary', notes: '시농, 부르게유, 소뮈르 샹피니 레드와 앙주 로제' },
+      { grapeId: 'melon-blanc', role: 'primary', notes: '뮈스카데, 쉬르 리(sur lie)' },
     ],
     classifications: [],
     wineStyles: [
@@ -476,6 +487,10 @@ export const franceRegions: Region[] = [
       { grapeId: 'cabernet-sauvignon', role: 'secondary', notes: 'IGP 페이 독의 단일 품종 와인으로 많이 생산.' },
       { grapeId: 'merlot', role: 'secondary', notes: 'IGP 페이 독의 단일 품종 와인으로 많이 생산.' },
       { grapeId: 'chardonnay', role: 'secondary', notes: 'IGP 페이 독 화이트, 리무(Limoux) 스파클링과 스틸 와인.' },
+      { grapeId: 'mourvedre', role: 'primary', notes: '방돌 레드는 최소 50%' },
+      { grapeId: 'carignan', role: 'secondary', notes: '랑그도크 전통 블렌드 품종' },
+      { grapeId: 'cinsault', role: 'secondary', notes: '프로방스 로제와 랑그도크 블렌드' },
+      { grapeId: 'muscat', role: 'secondary', notes: '뮈스카 드 프롱티냥, 리브잘트 VDN' },
     ],
     classifications: [
       {

@@ -29,6 +29,7 @@ export const southAfricaRegions: Region[] = [
       { grapeId: 'pinot-noir', role: 'secondary', notes: '워커 베이(헤멜 엔 아르데), 엘긴.' },
       { grapeId: 'grenache', role: 'secondary', notes: '스워틀랜드의 론 스타일 블렌드.' },
       { grapeId: 'semillon', role: 'secondary', notes: '콘스탄시아, 프란슈후크의 올드 바인과 소비뇽 블랑 블렌드.' },
+      { grapeId: 'cinsault', role: 'secondary', notes: '피노타주의 부모 품종' },
     ],
     classifications: [
       {

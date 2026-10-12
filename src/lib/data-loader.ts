@@ -14,6 +14,8 @@ import { argentinaRegions } from "@/data/regions/argentina";
 import { southAfricaRegions } from "@/data/regions/south-africa";
 import { redGrapes } from "@/data/grapes/red-grapes";
 import { whiteGrapes } from "@/data/grapes/white-grapes";
+import { moreRedGrapes, moreRedProfiles } from "@/data/grapes/more-reds";
+import { moreWhiteGrapes, moreWhiteProfiles } from "@/data/grapes/more-whites";
 
 export const allRegions: Region[] = [
   ...franceRegions,
@@ -30,7 +32,8 @@ export const allRegions: Region[] = [
   ...southAfricaRegions,
 ];
 
-export const allGrapes: GrapeVariety[] = [...redGrapes, ...whiteGrapes];
+export const allGrapes: GrapeVariety[] = [...redGrapes, ...moreRedGrapes, ...whiteGrapes, ...moreWhiteGrapes];
+const allProfiles: Record<string, GrapeProfile> = { ...grapeProfiles, ...moreRedProfiles, ...moreWhiteProfiles };
 
 // Indexes
 const regionMap = new Map<string, Region>();
@@ -51,7 +54,7 @@ export function getGrape(id: string): GrapeVariety | undefined {
 }
 
 export function getGrapeProfile(id: string): GrapeProfile | undefined {
-  return grapeProfiles[id];
+  return allProfiles[id];
 }
 
 export function getRegionChildren(parentId: string): Region[] {
