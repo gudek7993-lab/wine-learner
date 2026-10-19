@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fgrapes\u002F[grapeId]","\u002Fregions\u002F[regionId]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
