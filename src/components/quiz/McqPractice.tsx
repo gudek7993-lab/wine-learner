@@ -62,8 +62,8 @@ function QuestionCard({
               key={i}
               role="radio"
               aria-checked={chosen}
-              disabled={answered}
-              onClick={() => onAnswer(i)}
+              aria-disabled={answered}
+              onClick={() => !answered && onAnswer(i)}
               className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition-colors active:scale-[0.99] ${
                 right
                   ? "border-ok bg-ok-soft text-ink"
@@ -122,7 +122,7 @@ export default function McqPractice() {
         </p>
         <button
           onClick={loadNewQuiz}
-          className="inline-flex items-center gap-2 rounded-full border border-line-strong px-4 py-2 text-sm font-medium text-ink-2 transition-colors hover:border-ink hover:text-ink active:scale-[0.98]"
+          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line-strong px-4 text-sm font-medium text-ink-2 transition-colors hover:border-ink hover:text-ink active:scale-[0.98]"
         >
           <ArrowClockwise size={16} aria-hidden />
           새 문제
@@ -130,7 +130,7 @@ export default function McqPractice() {
       </div>
 
       {/* Progress */}
-      <div className="sticky top-[7.25rem] z-10 -mx-4 bg-paper/90 px-4 py-3 backdrop-blur-md lg:top-16">
+      <div className="sticky top-[6.85rem] z-10 -mx-4 bg-paper/90 px-4 py-3 backdrop-blur-md lg:top-16">
         <div className="flex items-center justify-between text-sm">
           <span className="text-ink-2">
             <span className="font-semibold tabular-nums text-ink">{answeredCount}</span> / {questions.length || QUESTIONS_PER_QUIZ} 풀이

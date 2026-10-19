@@ -180,12 +180,20 @@ function read<T>(key: string, fallback: T): T {
   }
 }
 
+let warned = false;
+/** Tell the user once when nothing can be saved (private mode, full storage). */
+export function warnStorageFailed() {
+  if (warned) return;
+  warned = true;
+  window.alert("이 브라우저에 기록을 저장할 수 없습니다(사생활 보호 모드이거나 저장 공간 부족). 창을 닫으면 답안과 결과가 사라집니다.");
+}
+
 function write(key: string, value: unknown) {
   try {
     if (value === null) localStorage.removeItem(key);
     else localStorage.setItem(key, JSON.stringify(value));
   } catch {
-    // storage unavailable (private mode); the attempt still works in memory
+    warnStorageFailed(); // the attempt still works in memory
   }
 }
 

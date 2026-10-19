@@ -18,7 +18,9 @@ try {
   git(`remote add origin ${remote}`);
   git("fetch -q --depth 1 origin gh-pages");
   git("checkout -q -b gh-pages FETCH_HEAD");
-  for (const name of readdirSync(dir)) if (name !== ".git") rmSync(join(dir, name), { recursive: true, force: true });
+  // Keep old _next/ chunks (hashed, immutable) so tabs opened before a deploy, e.g. a running
+  // 2-hour mock exam, can still load them. ponytail: never pruned; prune if the branch gets large.
+  for (const name of readdirSync(dir)) if (name !== ".git" && name !== "_next") rmSync(join(dir, name), { recursive: true, force: true });
   cpSync(out, dir, { recursive: true });
   git("add -A");
   const changed = execSync("git status --porcelain", { cwd: dir }).toString().trim();

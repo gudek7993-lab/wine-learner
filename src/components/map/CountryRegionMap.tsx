@@ -3,27 +3,27 @@
 import { useState } from "react";
 import Link from "next/link";
 import { countryMaps, type MapFrame } from "./country-maps";
-import { getRegion } from "@/lib/data-loader";
 
-const nameOf = (p: { id: string; nameKo?: string }) => p.nameKo ?? getRegion(p.id)?.nameKo ?? p.id;
 const hrefOf = (p: { id: string; href?: string }) => p.href ?? `/regions/${p.id}`;
 
 /** One map (main or inset): real outline, numbered pins. */
 function Frame({
   frame,
+  nameOf,
   active,
   setActive,
   label,
   boxes = [],
 }: {
   frame: MapFrame;
+  nameOf: (p: { id: string; nameKo?: string }) => string;
   active: string | null;
   setActive: (id: string | null) => void;
   label: string;
   boxes?: [number, number, number, number][];
 }) {
   return (
-    <svg viewBox={frame.viewBox} className="block h-auto max-h-[640px] w-full" role="img" aria-label={label}>
+    <svg viewBox={frame.viewBox} className="block h-auto max-h-[640px] w-full" role="group" aria-label={label}>
       <path d={frame.neighbours} fill="var(--paper)" stroke="var(--line)" strokeWidth="0.8" />
       <path d={frame.outline} fill="var(--sunken)" stroke="var(--line-strong)" strokeWidth="1" />
       {boxes.map(([x, y, w, h], i) => (
@@ -33,6 +33,7 @@ function Frame({
         const on = active === p.id;
         return (
           <Link key={p.id} href={hrefOf(p)} tabIndex={-1} aria-label={nameOf(p)} onMouseEnter={() => setActive(p.id)} onMouseLeave={() => setActive(null)}>
+            <circle cx={p.x} cy={p.y} r="18" fill="transparent" />
             <circle cx={p.x} cy={p.y} r={on ? 13 : 10} fill={on ? "var(--accent)" : "var(--style-medium-red)"} stroke="var(--surface)" strokeWidth="2" className="transition-all duration-200" />
             <text x={p.x} y={p.y} dy="0.35em" textAnchor="middle" fontSize="10" fontWeight="700" fill="var(--on-accent)" pointerEvents="none">
               {p.n}
@@ -45,10 +46,12 @@ function Frame({
 }
 
 /** Country map with numbered pins; clustered regions get zoomed insets (marked by dashed boxes). */
-export default function CountryRegionMap({ countryId }: { countryId: string }) {
+/** `names` maps region id to Korean name; resolved on the server so this island ships no region data. */
+export default function CountryRegionMap({ countryId, names }: { countryId: string; names: Record<string, string> }) {
   const [active, setActive] = useState<string | null>(null);
   const map = countryMaps[countryId];
   if (!map) return null;
+  const nameOf = (p: { id: string; nameKo?: string }) => p.nameKo ?? names[p.id] ?? p.id;
 
   const all = [...map.pins, ...map.insets.flatMap((i) => i.pins)].sort((a, b) => a.n - b.n);
   const hover = (id: string | null) => () => setActive(id);
@@ -56,12 +59,12 @@ export default function CountryRegionMap({ countryId }: { countryId: string }) {
   return (
     <div className="grid overflow-hidden rounded-xl border border-line bg-surface md:grid-cols-[1.3fr_1fr]">
       <div>
-        <Frame frame={map} active={active} setActive={setActive} label="주요 와인 산지 지도" boxes={map.insets.map((i) => i.box)} />
+        <Frame frame={map} nameOf={nameOf} active={active} setActive={setActive} label="주요 와인 산지 지도" boxes={map.insets.map((i) => i.box)} />
         {map.insets.length > 0 && (
           <div className="grid gap-3 border-t border-line p-3 sm:grid-cols-2">
             {map.insets.map((ins) => (
               <figure key={ins.title} className="overflow-hidden rounded-lg border border-dashed border-line-strong">
-                <Frame frame={ins} active={active} setActive={setActive} label={`${ins.title} 확대 지도`} />
+                <Frame frame={ins} nameOf={nameOf} active={active} setActive={setActive} label={`${ins.title} 확대 지도`} />
                 <figcaption className="border-t border-line px-3 py-1.5 text-xs text-ink-3">{ins.title} 확대</figcaption>
               </figure>
             ))}

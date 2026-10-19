@@ -114,7 +114,7 @@ function Exam({
 
   return (
     <div className="space-y-6">
-      <div className="sticky top-[6.9rem] z-10 -mx-4 flex flex-wrap items-center gap-3 border-b border-line bg-paper/90 px-4 py-3 backdrop-blur-md lg:top-16">
+      <div className="sticky top-[6.85rem] z-10 -mx-4 flex flex-wrap items-center gap-2 border-b border-line bg-paper/90 px-4 py-3 backdrop-blur-md lg:top-16">
         <Countdown endsAt={attempt.endsAt} onExpire={onSubmit} />
         <div role="tablist" aria-label="시험 파트" className="flex gap-1 rounded-full bg-sunken p-1">
           {([1, 2] as const).map((p) => (
@@ -126,13 +126,13 @@ function Exam({
                 setPart(p);
                 window.scrollTo({ top: 0 });
               }}
-              className={`rounded-full px-4 py-1 text-sm ${part === p ? "bg-surface font-semibold text-ink shadow-soft" : "text-ink-3"}`}
+              className={`rounded-full min-h-10 px-3 text-sm ${part === p ? "bg-surface font-semibold text-ink shadow-soft" : "text-ink-3"}`}
             >
               {p === 1 ? `객관식 ${answered}/${attempt.mcqIds.length}` : "서술형"}
             </button>
           ))}
         </div>
-        <button onClick={submit} className="ml-auto rounded-full bg-ink px-4 py-1.5 text-sm font-semibold text-paper active:scale-[0.98]">
+        <button onClick={submit} className="ml-auto min-h-11 rounded-full bg-ink px-4 text-sm font-semibold text-paper active:scale-[0.98]">
           제출
         </button>
       </div>

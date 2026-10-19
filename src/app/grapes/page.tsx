@@ -45,7 +45,7 @@ export default function GrapesPage() {
                 role="radio"
                 aria-checked={filter === f.id}
                 onClick={() => setFilter(f.id)}
-                className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
+                className={`rounded-full min-h-11 px-4 text-sm transition-colors ${
                   filter === f.id ? "bg-surface font-semibold text-ink shadow-soft" : "text-ink-3 hover:text-ink"
                 }`}
               >

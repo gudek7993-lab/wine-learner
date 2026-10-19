@@ -1,7 +1,6 @@
-"use client";
 
 import Link from "next/link";
-import { ArrowRight } from "@phosphor-icons/react";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { getRegion, getRegionChildren, getRegionBreadcrumbs, getGrape, getGrapeProfile } from "@/lib/data-loader";
 import { styleById } from "@/lib/wine-styles";
 import PageHeader from "@/components/ui/PageHeader";
@@ -93,7 +92,7 @@ function ClimateSoil({ region }: { region: Region }) {
 function SubRegions({ region, subs }: { region: Region; subs: Region[] }) {
   return (
     <div className="space-y-5">
-      <CountryRegionMap countryId={region.id} />
+      <CountryRegionMap countryId={region.id} names={Object.fromEntries(subs.map((c) => [c.id, c.nameKo]))} />
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {subs.map((child) => (
           <Card key={child.id} href={`/regions/${child.id}`} className="flex flex-col">

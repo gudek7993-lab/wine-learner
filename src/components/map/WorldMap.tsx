@@ -65,7 +65,7 @@ export default function WorldMap() {
 
   return (
     <div className="overflow-hidden rounded-xl border border-line bg-surface">
-      <svg viewBox={WORLD_VIEWBOX} className="block h-auto w-full" role="img" aria-label="와인 생산국 세계 지도">
+      <svg viewBox={WORLD_VIEWBOX} className="block h-auto w-full" role="group" aria-label="와인 생산국 세계 지도">
         {/* Wine belts: 30-50° N and 30-45° S (approximate projected bands) */}
         <g aria-hidden>
           {[wineBelts.north, wineBelts.south].map(([top, bottom], i) => (

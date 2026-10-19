@@ -28,7 +28,7 @@ export default function QuizPage() {
                 role="tab"
                 aria-selected={mode === m.id}
                 onClick={() => setMode(m.id)}
-                className={`rounded-full px-5 py-1.5 text-sm transition-colors ${
+                className={`rounded-full min-h-11 px-5 text-sm transition-colors ${
                   mode === m.id ? "bg-surface font-semibold text-ink shadow-soft" : "text-ink-3 hover:text-ink"
                 }`}
               >

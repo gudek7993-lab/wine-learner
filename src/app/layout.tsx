@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: `${base}/icon.svg`,
-    apple: `${base}/icon.svg`,
+    apple: `${base}/icon-180.png`,
   },
 };
 
@@ -41,6 +41,8 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="와인 러너" />
         <script dangerouslySetInnerHTML={{
           __html: `
+            // Ask the browser not to evict saved answers (Safari clears unused storage after 7 days).
+            if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
             if ('serviceWorker' in navigator) {
               window.addEventListener('load', function() {
                 navigator.serviceWorker.register('${base}/sw.js').then(
@@ -57,8 +59,11 @@ export default function RootLayout({
         }} />
       </head>
       <body className="min-h-[100dvh] bg-paper text-ink antialiased">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">
+          본문 바로가기
+        </a>
         <Navigation />
-        <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+        <main id="main" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 md:py-14">
           {children}
         </main>
         <footer className="border-t border-line">

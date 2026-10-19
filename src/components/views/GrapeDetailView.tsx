@@ -1,7 +1,6 @@
-"use client";
 
 import Link from "next/link";
-import { ForkKnife, ArrowRight } from "@phosphor-icons/react";
+import { ForkKnife, ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { getGrape, getGrapeProfile, getRegion } from "@/lib/data-loader";
 import { styleById } from "@/lib/wine-styles";
 import PageHeader from "@/components/ui/PageHeader";

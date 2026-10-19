@@ -1,6 +1,5 @@
-"use client";
 
-import { Plant, Flask } from "@phosphor-icons/react";
+import { Plant, Flask } from "@phosphor-icons/react/dist/ssr";
 import PageHeader from "@/components/ui/PageHeader";
 import TopicBlock from "@/components/ui/TopicBlock";
 import type { StudyTopic } from "@/data/types";
@@ -110,7 +109,7 @@ export default function TechniquesPage() {
               <a
                 key={g.id}
                 href={`#${g.id}`}
-                className="rounded-full border border-line-strong px-4 py-1.5 text-sm text-ink-2 transition-colors hover:border-ink hover:text-ink"
+                className="inline-flex min-h-11 items-center rounded-full border border-line-strong px-4 text-sm text-ink-2 transition-colors hover:border-ink hover:text-ink"
               >
                 {g.title}
               </a>

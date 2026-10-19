@@ -25,7 +25,7 @@ export default function ServicePage() {
               <a
                 key={g.id}
                 href={`#${g.id}`}
-                className="rounded-full border border-line-strong px-3.5 py-1.5 text-sm text-ink-2 transition-colors hover:border-ink hover:text-ink"
+                className="inline-flex min-h-11 items-center rounded-full border border-line-strong px-3.5 text-sm text-ink-2 transition-colors hover:border-ink hover:text-ink"
               >
                 {g.title}
               </a>

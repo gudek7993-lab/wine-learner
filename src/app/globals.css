@@ -105,6 +105,9 @@ html {
 body {
   background-color: var(--paper);
   color: var(--ink);
+  /* Korean: break between words, not inside them. */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 ::selection {

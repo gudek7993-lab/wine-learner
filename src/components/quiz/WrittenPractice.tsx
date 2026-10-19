@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Shuffle, CheckSquare, Square } from "@phosphor-icons/react";
 import ExamTipBox from "@/components/detail/ExamTipBox";
+import { warnStorageFailed } from "@/lib/exam";
 import { writtenQuestions as baseWritten, type WrittenQuestion } from "@/data/quiz/written-questions";
 import { lo5WrittenDrills } from "@/data/quiz/lo5-questions";
 
@@ -24,7 +25,7 @@ function save(data: Saved) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch {
-    // Private mode or storage full: answers simply aren't remembered.
+    warnStorageFailed();
   }
 }
 
@@ -79,7 +80,7 @@ export default function WrittenPractice() {
               setRevealed(false);
             }}
             aria-pressed={category === c}
-            className={`shrink-0 rounded-full px-3.5 py-1.5 text-sm transition-colors ${
+            className={`shrink-0 rounded-full min-h-11 px-3.5 text-sm transition-colors ${
               category === c ? "bg-ink font-semibold text-paper" : "bg-sunken text-ink-2 hover:text-ink"
             }`}
           >

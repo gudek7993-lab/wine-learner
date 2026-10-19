@@ -38,7 +38,7 @@ const methods = [
 const champagneStyles = [
   { name: "Non-Vintage (NV)", desc: "여러 빈티지 블렌딩. 하우스 스타일 일관성. 출시 전 최소 15개월 숙성, 그중 앙금 숙성 12개월" },
   { name: "Vintage", desc: "단일 빈티지. 우수한 해에만 생산. 출시 전 최소 3년 숙성" },
-  { name: "Blanc de Blancs", desc: "샤르도네 100%. 우아하고 시트러스 풍미. 섬세한 스타일" },
+  { name: "Blanc de Blancs", desc: "청포도로만 만든 샴페인(실제로는 대부분 샤르도네). 우아하고 시트러스 풍미, 섬세한 스타일" },
   { name: "Blanc de Noirs", desc: "피노 누아 and/or 피노 뮈니에 100%. 풍부하고 구조감" },
   { name: "Rosé", desc: "블렌딩 방식(적포도주 소량 혼합) 또는 세니에 방식" },
   { name: "Prestige Cuvée", desc: "최고급 블렌딩. Dom Pérignon, Krug, Cristal 등" },

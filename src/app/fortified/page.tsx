@@ -96,7 +96,7 @@ export default function FortifiedPage() {
                 role="tab"
                 aria-selected={activeTab === key}
                 onClick={() => setActiveTab(key)}
-                className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
+                className={`rounded-full min-h-11 px-4 text-sm transition-colors ${
                   activeTab === key ? "bg-surface font-semibold text-ink shadow-soft" : "text-ink-3 hover:text-ink"
                 }`}
               >
