@@ -3,6 +3,7 @@ import { Plant, Flask } from "@phosphor-icons/react/dist/ssr";
 import PageHeader from "@/components/ui/PageHeader";
 import TopicBlock from "@/components/ui/TopicBlock";
 import type { StudyTopic } from "@/data/types";
+import { extraViticulture, extraVinification } from "@/data/techniques/extra-topics";
 
 const viticultureTopics = [
   {
@@ -94,8 +95,8 @@ const vinificationTopics = [
 
 export default function TechniquesPage() {
   const groups = [
-    { id: "viticulture", title: "포도 재배", en: "Viticulture", icon: Plant, topics: viticultureTopics as StudyTopic[] },
-    { id: "vinification", title: "양조", en: "Vinification", icon: Flask, topics: vinificationTopics as StudyTopic[] },
+    { id: "viticulture", title: "포도 재배", en: "Viticulture", icon: Plant, topics: [...(viticultureTopics as StudyTopic[]), ...extraViticulture] },
+    { id: "vinification", title: "양조", en: "Vinification", icon: Flask, topics: [...(vinificationTopics as StudyTopic[]), ...extraVinification] },
   ];
 
   return (

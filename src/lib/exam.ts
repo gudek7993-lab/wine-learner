@@ -1,10 +1,15 @@
 import { questionBank, type QuizQuestion } from "@/data/quiz/question-bank";
 import { lo5Questions } from "@/data/quiz/lo5-questions";
-import { examWrittenQuestions } from "@/data/quiz/exam-written";
+import { lo1Questions } from "@/data/quiz/lo1-questions";
+import { lo2Questions } from "@/data/quiz/lo2-questions";
+import { lo34Questions } from "@/data/quiz/lo34-questions";
+import { examWrittenQuestions as written1 } from "@/data/quiz/exam-written";
+import { examWrittenQuestions2 } from "@/data/quiz/exam-written-2";
 import type { ExamSlot, ExamWrittenQuestion, LearningOutcome } from "@/data/quiz/exam-types";
 
 /** Every multiple-choice question in the app. */
-export const allMcq: QuizQuestion[] = [...questionBank, ...lo5Questions];
+export const allMcq: QuizQuestion[] = [...questionBank, ...lo1Questions, ...lo2Questions, ...lo34Questions, ...lo5Questions];
+const examWrittenQuestions: ExamWrittenQuestion[] = [...written1, ...examWrittenQuestions2];
 
 const categoryLO: Record<string, LearningOutcome> = {
   "재배학": 1,
