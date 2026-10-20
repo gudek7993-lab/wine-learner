@@ -3,31 +3,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Shuffle, CheckSquare, Square } from "@phosphor-icons/react";
 import ExamTipBox from "@/components/detail/ExamTipBox";
-import { warnStorageFailed } from "@/lib/exam";
+import { KEYS, read, write } from "@/lib/store";
 import { writtenQuestions as baseWritten, type WrittenQuestion } from "@/data/quiz/written-questions";
 import { lo5WrittenDrills } from "@/data/quiz/lo5-questions";
 
 const writtenQuestions: WrittenQuestion[] = [...baseWritten, ...lo5WrittenDrills];
 
-const STORAGE_KEY = "wine-learner:written-answers";
-
 type Saved = Record<string, { text: string; checked: number[] }>;
 
-function load(): Saved {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "{}") as Saved;
-  } catch {
-    return {};
-  }
-}
-
-function save(data: Saved) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  } catch {
-    warnStorageFailed();
-  }
-}
+const load = () => read<Saved>(KEYS.written, {});
+const save = (data: Saved) => write(KEYS.written, data);
 
 const categories = ["전체", ...Array.from(new Set(writtenQuestions.map((q) => q.category)))];
 

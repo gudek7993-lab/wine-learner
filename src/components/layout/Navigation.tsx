@@ -13,6 +13,7 @@ const navItems = [
   { href: "/fortified", label: "강화 와인" },
   { href: "/service", label: "서비스" },
   { href: "/tasting", label: "테이스팅" },
+  { href: "/review", label: "복습" },
   { href: "/quiz", label: "연습 문제" },
   { href: "/mock", label: "모의고사" },
 ];
@@ -61,8 +62,8 @@ export default function Navigation() {
         </Link>
         <nav aria-label="주요 메뉴" className="hidden lg:flex items-center gap-5">{links}</nav>
         <div className="ml-auto flex gap-2 lg:hidden">
-          <Link href="/quiz" className="flex min-h-11 items-center rounded-full bg-sunken px-4 text-sm font-semibold text-ink">
-            연습
+          <Link href="/review" className="flex min-h-11 items-center rounded-full bg-sunken px-4 text-sm font-semibold text-ink">
+            복습
           </Link>
           <Link href="/mock" className="flex min-h-11 items-center rounded-full bg-accent px-4 text-sm font-semibold text-on-accent">
             모의고사

@@ -6,6 +6,7 @@ import Badge from "@/components/ui/Badge";
 import { OutOfScopeBadge } from "@/components/ui/OutOfScope";
 import type { QuizQuestion } from "@/data/quiz/question-bank";
 import { allMcq } from "@/lib/exam";
+import { recordAnswer } from "@/lib/srs";
 
 function getRandomQuestions(n: number): QuizQuestion[] {
   const a = [...allMcq];
@@ -27,7 +28,7 @@ function gradeFor(pct: number) {
   return { label: "재도전", note: "합격선은 55%입니다. 틀린 문제의 해설을 다시 읽어 보세요." };
 }
 
-function QuestionCard({
+export function QuestionCard({
   q,
   index,
   answer,
@@ -156,7 +157,10 @@ export default function McqPractice() {
       ) : (
         <div className="space-y-4">
           {questions.map((q, i) => (
-            <QuestionCard key={q.id} q={q} index={i} answer={answers[q.id]} onAnswer={(opt) => setAnswers((prev) => ({ ...prev, [q.id]: opt }))} />
+            <QuestionCard key={q.id} q={q} index={i} answer={answers[q.id]} onAnswer={(opt) => {
+              setAnswers((prev) => ({ ...prev, [q.id]: opt }));
+              recordAnswer(q.id, opt === q.correct);
+            }} />
           ))}
         </div>
       )}

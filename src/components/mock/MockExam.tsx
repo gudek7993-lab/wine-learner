@@ -22,6 +22,7 @@ import {
   type MockResult,
 } from "@/lib/exam";
 import type { LearningOutcome } from "@/data/quiz/exam-types";
+import { recordAnswers } from "@/lib/srs";
 
 const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
 const fmtDate = (t: number) => new Date(t).toLocaleDateString("ko-KR", { month: "long", day: "numeric" });
@@ -424,6 +425,8 @@ export default function MockExam() {
     if (!attempt) return;
     const marked = { ...attempt, marked: true };
     const r = scoreAttempt(marked);
+    // Every mock answer feeds the review queue: wrong ones come back tomorrow.
+    recordAnswers(attempt.mcqIds.filter((id) => getMcq(id)).map((id) => [id, attempt.mcqAnswers[id] === getMcq(id)!.correct]));
     const h = [...history, r];
     saveHistory(h);
     saveCurrent(null);

@@ -6,6 +6,7 @@ import { Grains, Flask, Champagne, Drop, Eye, Exam, ArrowRight, ForkKnife, Timer
 import WorldMap from "@/components/map/WorldMap";
 import SearchBar from "@/components/ui/SearchBar";
 import StyleSpectrum from "@/components/grape/StyleSpectrum";
+import TodayCard from "@/components/home/TodayCard";
 import { search, allGrapes } from "@/lib/data-loader";
 
 const studyLinks = [
@@ -23,7 +24,9 @@ export default function HomePage() {
   const router = useRouter();
 
   return (
-    <div className="space-y-20 md:space-y-24">
+    <div className="space-y-12">
+      <TodayCard />
+      <div className="space-y-20 md:space-y-24">
       {/* Hero */}
       <section className="grid gap-10 md:grid-cols-12 md:gap-12">
         <div className="rise md:col-span-7">
@@ -79,6 +82,7 @@ export default function HomePage() {
           <StyleSpectrum />
         </div>
       </section>
+      </div>
     </div>
   );
 }

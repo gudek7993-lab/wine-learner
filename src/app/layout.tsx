@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "@/components/layout/Navigation";
+import SyncBar from "@/components/layout/SyncBar";
 
 const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -67,8 +68,9 @@ export default function RootLayout({
           {children}
         </main>
         <footer className="border-t border-line">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 text-sm text-ink-3">
-            WSET Level 3 학습용 개인 노트. 품종 맛 프로필은 Wine Folly와 WSET 교재를 참고해 정리했습니다.
+          <div className="mx-auto max-w-6xl space-y-3 px-4 sm:px-6 lg:px-8 py-8 text-sm text-ink-3">
+            <SyncBar />
+            <p>WSET Level 3 학습용 개인 노트. 품종 맛 프로필은 Wine Folly와 WSET 교재를 참고해 정리했습니다.</p>
           </div>
         </footer>
       </body>

@@ -5,6 +5,7 @@ import { lo2Questions } from "@/data/quiz/lo2-questions";
 import { lo34Questions } from "@/data/quiz/lo34-questions";
 import { examWrittenQuestions as written1 } from "@/data/quiz/exam-written";
 import { examWrittenQuestions2 } from "@/data/quiz/exam-written-2";
+import { KEYS, read, write } from "@/lib/store";
 import type { ExamSlot, ExamWrittenQuestion, LearningOutcome } from "@/data/quiz/exam-types";
 
 /** Every multiple-choice question in the app. */
@@ -172,37 +173,8 @@ export function theoryGrade(mcqPct: number, swaPct: number) {
   return { label: "Pass 수준", note: "Merit까지: 평균 65% 이상." };
 }
 
-// ---------- storage (device only until sync lands in Phase 2) ----------
-const CURRENT_KEY = "wine-learner:mock-current";
-const HISTORY_KEY = "wine-learner:mock-history";
-
-function read<T>(key: string, fallback: T): T {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? (JSON.parse(raw) as T) : fallback;
-  } catch {
-    return fallback;
-  }
-}
-
-let warned = false;
-/** Tell the user once when nothing can be saved (private mode, full storage). */
-export function warnStorageFailed() {
-  if (warned) return;
-  warned = true;
-  window.alert("이 브라우저에 기록을 저장할 수 없습니다(사생활 보호 모드이거나 저장 공간 부족). 창을 닫으면 답안과 결과가 사라집니다.");
-}
-
-function write(key: string, value: unknown) {
-  try {
-    if (value === null) localStorage.removeItem(key);
-    else localStorage.setItem(key, JSON.stringify(value));
-  } catch {
-    warnStorageFailed(); // the attempt still works in memory
-  }
-}
-
-export const loadCurrent = () => read<MockAttempt | null>(CURRENT_KEY, null);
-export const saveCurrent = (a: MockAttempt | null) => write(CURRENT_KEY, a);
-export const loadHistory = () => read<MockResult[]>(HISTORY_KEY, []);
-export const saveHistory = (h: MockResult[]) => write(HISTORY_KEY, h);
+// ---------- storage ----------
+export const loadCurrent = () => read<MockAttempt | null>(KEYS.mockCurrent, null);
+export const saveCurrent = (a: MockAttempt | null) => write(KEYS.mockCurrent, a);
+export const loadHistory = () => read<MockResult[]>(KEYS.mockHistory, []);
+export const saveHistory = (h: MockResult[]) => write(KEYS.mockHistory, h);
