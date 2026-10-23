@@ -4,3 +4,4 @@ node_modules
 *.tsbuildinfo
 out
 compare-markers-result*.json
+supabase/.temp/
