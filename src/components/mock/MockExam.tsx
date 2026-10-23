@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { CheckSquare, Square, ArrowRight, ClockCounterClockwise } from "@phosphor-icons/react";
 import Countdown from "./Countdown";
 import ExamTipBox from "@/components/detail/ExamTipBox";
+import AiMarkPanel from "@/components/quiz/AiMarkPanel";
 import {
   buildMock,
   getMcq,
@@ -280,6 +281,17 @@ function Marking({
                 </section>
               );
             })}
+            <AiMarkPanel
+              stem={q.stem}
+              parts={q.parts.map((p) => ({ label: p.label, prompt: p.prompt, marks: p.marks, markingPoints: p.markingPoints, answer: attempt.swaAnswers[partKey(id, p.label)] ?? "" }))}
+              selfScore={q.parts.reduce((a, p) => a + Math.min(attempt.swaChecks[partKey(id, p.label)]?.length ?? 0, p.marks), 0)}
+              onApply={(checks) =>
+                setAttempt((a) => ({
+                  ...a,
+                  swaChecks: { ...a.swaChecks, ...Object.fromEntries(Object.entries(checks).map(([label, idx]) => [partKey(id, label), idx])) },
+                }))
+              }
+            />
             {q.examinerTip && (
               <div className="mt-5">
                 <ExamTipBox text={q.examinerTip} />

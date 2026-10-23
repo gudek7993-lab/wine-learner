@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Shuffle, CheckSquare, Square } from "@phosphor-icons/react";
 import ExamTipBox from "@/components/detail/ExamTipBox";
+import AiMarkPanel from "@/components/quiz/AiMarkPanel";
 import { KEYS, read, write } from "@/lib/store";
 import { writtenQuestions as baseWritten, type WrittenQuestion } from "@/data/quiz/written-questions";
 import { lo5WrittenDrills } from "@/data/quiz/lo5-questions";
@@ -138,6 +139,12 @@ export default function WrittenPractice() {
                 );
               })}
             </ul>
+            <AiMarkPanel
+              key={q.id}
+              parts={[{ label: "a", prompt: q.question, marks: q.marks, markingPoints: q.markingPoints, answer: entry.text }]}
+              selfScore={score}
+              onApply={(checks) => update({ checked: checks.a ?? [] })}
+            />
             {q.examinerTip && (
               <div className="mt-5">
                 <ExamTipBox text={q.examinerTip} />

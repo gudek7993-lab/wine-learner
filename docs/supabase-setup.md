@@ -71,3 +71,17 @@ Supabase **Project Settings → API**(또는 API Keys)에서 아래 두 값을 �
 
 값이 들어가면 `src/lib/supabase-config.ts`에 넣고 배포합니다. 그 뒤 사이트 맨 아래에
 "Google로 로그인해 동기화" 버튼이 나타납니다. 휴대폰과 데스크톱에서 한 번씩 로그인하면 끝입니다.
+
+## 6. AI 서술형 채점 (Edge Function `mark`)
+
+- 코드: `supabase/functions/mark/index.ts` (Claude Sonnet 5.5, 하루 40회 제한, 로그인 필수)
+- 모델 선택 근거: `npx tsx scripts/compare-markers.mts` (Opus 5.5, Sonnet 5.5, Haiku 5.5, Gemini 비교)
+- 비밀값: Supabase Edge Functions → Secrets의 `ANTHROPIC_API_KEY`
+- 사용 기록 테이블: `ai_mark_log` (RLS 켜짐, 정책 없음: 함수만 접근)
+
+함수를 고친 뒤 다시 배포하려면:
+
+1. https://supabase.com/dashboard/account/tokens 에서 만료가 짧은 토큰을 만들고 `.env.local`에 `SUPABASE_ACCESS_TOKEN=...`으로 넣습니다.
+2. `SUPABASE_ACCESS_TOKEN`을 환경 변수로 두고 실행합니다:
+   `npx supabase functions deploy mark --project-ref qfdxszjccfrrcuyojtdf --use-api`
+3. 배포가 끝나면 토큰을 삭제합니다.
