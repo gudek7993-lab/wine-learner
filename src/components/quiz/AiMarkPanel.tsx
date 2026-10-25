@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Sparkle, CheckCircle } from "@phosphor-icons/react";
 import { aiMark, type AiPart, type MarkPart } from "@/lib/ai-mark";
 
@@ -20,10 +20,13 @@ export default function AiMarkPanel({
   onApply: (checks: Record<string, number[]>) => void;
 }) {
   const [state, setState] = useState<{ status: "idle" | "loading" | "done" | "error"; result?: AiPart[]; error?: string }>({ status: "idle" });
+  const [applied, setApplied] = useState(false);
+  const box = useRef<HTMLElement>(null);
   const empty = parts.every((p) => !p.answer.trim());
 
   const run = async () => {
     setState({ status: "loading" });
+    setApplied(false);
     try {
       setState({ status: "done", result: await aiMark(stem, parts) });
     } catch (e) {
@@ -35,7 +38,7 @@ export default function AiMarkPanel({
   const max = parts.reduce((a, p) => a + p.marks, 0);
 
   return (
-    <section className="mt-5 rounded-xl border border-line bg-paper p-4" aria-live="polite">
+    <section ref={box} className="mt-5 rounded-xl border border-line bg-paper p-4" aria-live="polite">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h4 className="flex items-center gap-1.5 font-semibold text-ink">
           <Sparkle size={18} weight="fill" className="text-accent" aria-hidden /> AI 채점
@@ -84,12 +87,24 @@ export default function AiMarkPanel({
               {r.feedback && <p className="mt-2 rounded-lg bg-sunken p-3 text-sm leading-relaxed text-ink-2">{r.feedback}</p>}
             </div>
           ))}
-          <button
-            onClick={() => onApply(Object.fromEntries(state.result!.map((r) => [r.label, r.awarded.map((a) => a.index)])))}
-            className="inline-flex min-h-11 items-center rounded-full border border-line-strong px-4 text-sm font-medium text-ink-2 hover:border-ink hover:text-ink"
-          >
-            AI 결과를 내 채점에 적용
-          </button>
+          {applied ? (
+            <p className="flex items-center gap-1.5 text-sm font-medium text-ok">
+              <CheckCircle size={16} weight="fill" aria-hidden />
+              적용했습니다. 위 채점 포인트 체크가 AI 결과로 바뀌었습니다 (체크 {state.result.reduce((a, r) => a + r.awarded.length, 0)}개, {total}점).
+            </p>
+          ) : (
+            <button
+              onClick={() => {
+                onApply(Object.fromEntries(state.result!.map((r) => [r.label, r.awarded.map((a) => a.index)])));
+                setApplied(true);
+                // The checklist sits above this panel: bring it into view so the change is visible.
+                box.current?.parentElement?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="inline-flex min-h-11 items-center rounded-full border border-line-strong px-4 text-sm font-medium text-ink-2 hover:border-ink hover:text-ink"
+            >
+              AI 결과를 내 채점에 적용
+            </button>
+          )}
         </div>
       )}
     </section>
