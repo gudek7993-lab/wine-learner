@@ -74,11 +74,11 @@ export default function Navigation() {
   return (
     <>
     <header className="sticky top-0 z-40 border-b border-line bg-paper/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center gap-10 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 lg:gap-10 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex shrink-0 items-center gap-2 font-bold tracking-tight text-ink">
           <Wine size={22} weight="fill" className="text-accent" aria-hidden />
           와인 러너
-          <span className="ml-1 rounded-full bg-sunken px-2 py-0.5 text-[11px] font-semibold text-ink-3">L3</span>
+          <span className="ml-1 hidden rounded-full min-[380px]:inline bg-sunken px-2 py-0.5 text-[11px] font-semibold text-ink-3">L3</span>
         </Link>
         <nav aria-label="주요 메뉴" className="hidden lg:flex items-center gap-5">{links}</nav>
         <button
@@ -91,7 +91,7 @@ export default function Navigation() {
           <span>검색</span>
           <kbd className="ml-auto rounded bg-sunken px-1.5 py-0.5 text-[11px] font-semibold text-ink-3">Ctrl K</kbd>
         </button>
-        <div className="ml-auto flex gap-2 lg:hidden">
+        <div className="ml-auto flex shrink-0 gap-1.5 lg:hidden">
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
@@ -100,10 +100,10 @@ export default function Navigation() {
           >
             <MagnifyingGlass size={20} aria-hidden />
           </button>
-          <Link href="/review" className="flex min-h-11 items-center rounded-full bg-sunken px-4 text-sm font-semibold text-ink">
+          <Link href="/review" className="flex min-h-11 items-center whitespace-nowrap rounded-full bg-sunken px-3 text-sm font-semibold text-ink">
             복습
           </Link>
-          <Link href="/mock" className="flex min-h-11 items-center rounded-full bg-accent px-4 text-sm font-semibold text-on-accent">
+          <Link href="/mock" className="flex min-h-11 items-center whitespace-nowrap rounded-full bg-accent px-3 text-sm font-semibold text-on-accent">
             모의고사
           </Link>
         </div>
