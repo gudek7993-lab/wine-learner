@@ -51,25 +51,6 @@ export default function TodayCard() {
   return (
     <section aria-label="오늘의 학습" className="grid overflow-hidden rounded-xl border border-line bg-line gap-px sm:grid-cols-2 lg:grid-cols-4">
       <div className={tile}>
-        <p className="text-xs text-ink-3">시험까지</p>
-        <p className="mt-1 text-2xl font-bold tabular-nums tracking-tight text-ink">{dday > 0 ? `D-${dday}` : dday === 0 ? "D-day" : "시험 종료"}</p>
-        <label className="mt-2 flex items-center gap-2 text-xs text-ink-3">
-          시험일
-          <input
-            type="date"
-            value={v.settings.examDate}
-            onChange={(e) => {
-              if (!e.target.value) return;
-              const settings = { ...v.settings, examDate: e.target.value };
-              saveSettings(settings);
-              setV({ ...v, settings });
-            }}
-            className="rounded-md border border-line-strong bg-paper px-2 py-1 text-ink"
-          />
-        </label>
-      </div>
-
-      <div className={tile}>
         <p className="text-xs text-ink-3">오늘 복습</p>
         <p className="mt-1 text-2xl font-bold tabular-nums tracking-tight text-ink">{v.due}문항</p>
         <Link href="/review" className="mt-2 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-accent px-4 text-sm font-semibold text-on-accent hover:bg-accent-hover">
@@ -105,6 +86,25 @@ export default function TodayCard() {
           </Link>
         )}
         <p className="mt-1 text-sm text-ink-3">{mockWeek || !focus ? "실전 형식으로 실력을 점검할 때입니다." : "최근 모의고사에서 가장 약했던 영역입니다."}</p>
+      </div>
+
+      <div className={tile}>
+        <p className="text-xs text-ink-3">시험까지</p>
+        <p className="mt-1 text-2xl font-bold tabular-nums tracking-tight text-ink">{dday > 0 ? `D-${dday}` : dday === 0 ? "D-day" : "시험 종료"}</p>
+        <label className="mt-2 flex items-center gap-2 text-xs text-ink-3">
+          시험일
+          <input
+            type="date"
+            value={v.settings.examDate}
+            onChange={(e) => {
+              if (!e.target.value) return;
+              const settings = { ...v.settings, examDate: e.target.value };
+              saveSettings(settings);
+              setV({ ...v, settings });
+            }}
+            className="rounded-md border border-line-strong bg-paper px-2 py-1 text-ink"
+          />
+        </label>
       </div>
     </section>
   );
