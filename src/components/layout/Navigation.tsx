@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Wine } from "@phosphor-icons/react";
+import { Wine, MagnifyingGlass } from "@phosphor-icons/react";
+import GlobalSearch from "@/components/search/GlobalSearch";
 
 const navItems = [
   { href: "/", label: "산지 지도" },
@@ -26,6 +27,24 @@ function isActive(pathname: string, href: string) {
 export default function Navigation() {
   const pathname = usePathname();
   const strip = useRef<HTMLElement>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  // Ctrl/Cmd+K toggles search anywhere; "/" opens it unless the user is typing.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setSearchOpen((o) => !o);
+      } else if (e.key === "/" && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        const el = e.target as HTMLElement | null;
+        if (el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))) return;
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   // Keep the current page visible in the scrolling mobile menu. Sets scrollLeft directly:
   // scrollIntoView would also move the browser's Tab starting point past the skip link.
@@ -53,6 +72,7 @@ export default function Navigation() {
   });
 
   return (
+    <>
     <header className="sticky top-0 z-40 border-b border-line bg-paper/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-10 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex shrink-0 items-center gap-2 font-bold tracking-tight text-ink">
@@ -61,7 +81,25 @@ export default function Navigation() {
           <span className="ml-1 rounded-full bg-sunken px-2 py-0.5 text-[11px] font-semibold text-ink-3">L3</span>
         </Link>
         <nav aria-label="주요 메뉴" className="hidden lg:flex items-center gap-5">{links}</nav>
+        <button
+          type="button"
+          onClick={() => setSearchOpen(true)}
+          aria-label="전체 검색 열기 (Ctrl+K)"
+          className="ml-auto hidden min-h-11 w-56 items-center gap-2 rounded-full border border-line-strong bg-surface px-4 text-sm text-ink-3 transition-colors hover:border-ink hover:text-ink lg:flex"
+        >
+          <MagnifyingGlass size={16} aria-hidden />
+          <span>검색</span>
+          <kbd className="ml-auto rounded bg-sunken px-1.5 py-0.5 text-[11px] font-semibold text-ink-3">Ctrl K</kbd>
+        </button>
         <div className="ml-auto flex gap-2 lg:hidden">
+          <button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            aria-label="전체 검색 열기"
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-sunken text-ink"
+          >
+            <MagnifyingGlass size={20} aria-hidden />
+          </button>
           <Link href="/review" className="flex min-h-11 items-center rounded-full bg-sunken px-4 text-sm font-semibold text-ink">
             복습
           </Link>
@@ -78,5 +116,7 @@ export default function Navigation() {
         {links}
       </nav>
     </header>
+    <GlobalSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
+    </>
   );
 }

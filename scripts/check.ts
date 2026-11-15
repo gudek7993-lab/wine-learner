@@ -41,3 +41,27 @@ assert.deepEqual(m.written, { q1: "local", q2: "remote" });
 assert.equal((m.settings as { examDate: string }).examDate, "2027-02-01", "this device's settings win");
 
 console.log("checks passed");
+
+// Site-wide search: index covers every content area, hrefs point at real routes/anchors, queries rank sensibly
+import { buildIndex } from "../src/lib/search-index";
+import { searchDocs, norm } from "../src/lib/search";
+import { topicAnchor } from "../src/lib/anchors";
+{
+  const docs = buildIndex();
+  const types = new Set(docs.map((d) => d.type));
+  for (const t of ["region", "grape", "technique", "service", "sparkling", "fortified", "tasting", "quiz"])
+    assert.ok(types.has(t as never), `search index has ${t} docs`);
+  assert.equal(new Set(docs.map((d) => d.id)).size, docs.length, "search doc ids are unique");
+  const routes = /^\/(regions\/[^/#?]+|grapes\/[^/#?]+|techniques\/|service\/|sparkling\/|fortified\/|tasting\/|quiz\/)/;
+  for (const d of docs) {
+    assert.ok(d.title && d.href.startsWith("/") && routes.test(d.href), `bad search doc: ${d.id} ${d.href}`);
+  }
+  assert.equal(topicAnchor(" 기후 유형 "), "t-기후-유형");
+  assert.equal(norm("Pinot-Noir"), norm("pinot noir"));
+  const top = (q: string) => searchDocs(docs, q)[0]?.doc;
+  assert.equal(top("플로르")?.type, "fortified", "플로르 -> fortified");
+  assert.ok(searchDocs(docs, "pinot noir").some((h) => h.doc.type === "grape"), "english grape name found");
+  assert.ok(searchDocs(docs, "mlf").length > 0, "body-text term found");
+  assert.equal(searchDocs(docs, "zzzzqq").length, 0);
+}
+console.log("search ok");

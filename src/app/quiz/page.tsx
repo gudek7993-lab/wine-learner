@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PageHeader from "@/components/ui/PageHeader";
 import McqPractice from "@/components/quiz/McqPractice";
 import WrittenPractice from "@/components/quiz/WrittenPractice";
@@ -14,6 +14,11 @@ const modes: { id: Mode; label: string }[] = [
 
 export default function QuizPage() {
   const [mode, setMode] = useState<Mode>("mcq");
+
+  // Deep link from search: /quiz/?mode=written
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("mode") === "written") setMode("written");
+  }, []);
 
   return (
     <div className="space-y-10">

@@ -1,10 +1,11 @@
 import ProcessFlow from "@/components/ui/ProcessFlow";
 import ExamTipBox from "@/components/detail/ExamTipBox";
 import type { StudyTopic } from "@/data/types";
+import { topicAnchor } from "@/lib/anchors";
 
 export default function TopicBlock({ topic }: { topic: StudyTopic }) {
   return (
-    <article className="rounded-xl border border-line bg-surface p-5 md:p-6">
+    <article id={topicAnchor(topic.title)} className="scroll-mt-24 rounded-xl border border-line bg-surface p-5 md:p-6">
       <h3 className="text-lg font-bold text-ink">{topic.title}</h3>
       {topic.content && (
         <div className="mt-4">
